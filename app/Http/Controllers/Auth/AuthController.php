@@ -69,4 +69,16 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * Override method AuthenticatesUsers.php
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function loginUsername()
+    {
+        return property_exists($this, 'nama_pengguna') ? $this->username : 'email_pengguna';
+    }
+
 }

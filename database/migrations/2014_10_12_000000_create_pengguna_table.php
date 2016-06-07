@@ -19,6 +19,7 @@ class CreatePenggunaTable extends Migration
             $table->string('password');
             $table->string('token');
             $table->integer('hak_akses');
+            $table->rememberToken();
             $table->engine='InnoDB';
         });
     }
