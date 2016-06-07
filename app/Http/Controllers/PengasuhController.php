@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class PengasuhsController extends Controller
+class PengasuhController extends Controller
 {
     /**
      * Display a listing of the resource.

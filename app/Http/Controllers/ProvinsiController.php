@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ProvincesController extends Controller
+class ProvinsiController extends Controller
 {
     /**
      * Display a listing of the resource.

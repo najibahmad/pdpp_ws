@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePesantrensTable extends Migration
+class CreateProvinsiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,10 @@ class CreatePesantrensTable extends Migration
      */
     public function up()
     {
-        Schema::table('pesantrens', function (Blueprint $table) {
-            //
+        Schema::create('provinsi', function (Blueprint $table) {
+          $table->increments('id_provinsi')->unique();
+          $table->string('nama_provinsi',45);
+          $table->engine='InnoDB';
         });
     }
 
@@ -24,8 +26,6 @@ class CreatePesantrensTable extends Migration
      */
     public function down()
     {
-        Schema::table('pesantrens', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('provinsi');
     }
 }

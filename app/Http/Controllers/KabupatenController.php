@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class PesantrensController extends Controller
+class KabupatenController extends Controller
 {
     /**
      * Display a listing of the resource.
