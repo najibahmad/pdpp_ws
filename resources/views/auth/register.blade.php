@@ -11,28 +11,28 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="nama_pengguna" class="col-md-4 control-label">Nama Pengguna</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                <input id="nama_pengguna" type="text" class="form-control" name="nama_pengguna" value="{{ old('name') }}">
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('nama_penguna'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('nama_pengguna') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('email_pengguna') ? ' has-error' : '' }}">
+                            <label for="email_pengguna" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input id="email_pengguna" type="email" class="form-control" name="email_pengguna" value="{{ old('email') }}">
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('email_pengguna'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('email_pengguna') }}</strong>
                                     </span>
                                 @endif
                             </div>
