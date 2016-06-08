@@ -13,7 +13,7 @@ class ProvinsiRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class ProvinsiRequest extends Request
     public function rules()
     {
         return [
-            //
+          'nama_provinsi' => 'required'
         ];
     }
+
+    public function messages()
+  	{
+  		return [
+  			'nama_provinsi.required' => 'Nama Provinsi tidak boleh kosong'
+  		];
+  	}
 }

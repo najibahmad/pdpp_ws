@@ -18,3 +18,12 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::resource('admin/provinsi','ProvinsiController',['except' => ['show','destroy']]);
+Route::delete('admin/provinsi/delete/{provinsi}','ProvinsiController@destroy');
+Route::resource('admin/kabupaten','KabupatenController',['except' => ['show','destroy']]);
+Route::delete('admin/kabupaten/delete/{kabupaten}','KabupatenController@destroy');
+Route::resource('admin/pengasuh','PengasuhController',['except' => ['show','destroy']]);
+Route::delete('admin/pengasuh/delete/{pengasuh}','PengasuhController@destroy');
+Route::resource('admin/pesantren','PesantrenController',['except' => ['show','destroy']]);
+Route::delete('admin/pesantren/delete/{pesantren}','PesantrenController@destroy');

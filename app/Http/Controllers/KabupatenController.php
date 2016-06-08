@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Provinsi;
+use App\Kabupaten;
+use App\Http\Requests\KabupatenRequest;
+
 class KabupatenController extends Controller
 {
     /**
@@ -15,7 +19,9 @@ class KabupatenController extends Controller
      */
     public function index()
     {
-        //
+      $kab = Kabupaten::all();
+      //$prov = Provinsi::all();
+      return view('kabupaten.kab', compact('kab'));
     }
 
     /**
@@ -25,7 +31,9 @@ class KabupatenController extends Controller
      */
     public function create()
     {
-        //
+      $prov = Provinsi::lists('nama_provinsi','id_provinsi');
+
+      return view('kabupaten.create',compact('prov'));
     }
 
     /**
@@ -34,9 +42,13 @@ class KabupatenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KabupatenRequest $request)
     {
-        //
+        Kabupaten::create($request->all());
+
+        \Session::flash('pesan','Kabupaten baru telah berhasil dimasukan!');
+
+        return redirect('admin/kabupaten');
     }
 
     /**
@@ -58,7 +70,11 @@ class KabupatenController extends Controller
      */
     public function edit($id)
     {
-        //
+      $prov = Provinsi::lists('nama_provinsi','id_provinsi');
+      $kab = Kabupaten::findOrFail($id);
+
+      return view('kabupaten.edit', compact('kab','prov'));
+
     }
 
     /**
@@ -68,9 +84,16 @@ class KabupatenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(KabupatenRequest $request, $id)
     {
-        //
+      //Find or Fail to get ID
+      $kab = Kabupaten::findOrFail($id);
+
+      //Save record to the database
+      $kab->update($request->all());
+
+      //Return to universities controller
+      return redirect('admin/kabupaten');
     }
 
     /**
@@ -81,6 +104,8 @@ class KabupatenController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Kabupaten::destroy($id);
+
+      return redirect('admin/kabupaten');
     }
 }

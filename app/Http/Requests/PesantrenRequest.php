@@ -13,7 +13,7 @@ class PesantrenRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,25 @@ class PesantrenRequest extends Request
      *
      * @return array
      */
-    public function rules()
+     public function rules()
+     {
+         return [
+             'NSPP' => 'required',
+             'nama_pesantren' => 'required',
+             'jumlah_santri' => 'not_in:100',
+             'kabupaten_id_kabupaten' => 'not_in:0',
+             'pengasuh_id_pengasuh' => 'not_in:0',
+         ];
+     }
+
+     public function messages()
     {
-        return [
-            //
-        ];
+      return [
+        'NSPP.required' => 'Nomor Statistik Pondok Pesantren tidak boleh kosong',
+        'nama_pesantren.required' => 'Nama Pesantren tidak boleh kosong',
+        'jumlah_santri.required' => 'Jumlah santri tidak boleh kosong',
+        'kabupaten_id_kabupaten.not_in' => 'Kabupaten tidak boleh kosong',
+        'pengasuh_id_pengasuh.not_in' => 'Nama Pengasuh Pondok tidak boleh kosong'
+      ];
     }
 }

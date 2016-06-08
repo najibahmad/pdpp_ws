@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Pesantren;
+use App\Kabupaten;
+use App\Pengasuh;
+use App\Http\Requests\PesantrenRequest;
 
 class PesantrenController extends Controller
 {
@@ -15,7 +18,9 @@ class PesantrenController extends Controller
      */
     public function index()
     {
-        //
+      $pesantren = Pesantren::all();
+      //$prov = Provinsi::all();
+      return view('pesantren.pesantren', compact('pesantren'));
     }
 
     /**
@@ -25,7 +30,11 @@ class PesantrenController extends Controller
      */
     public function create()
     {
-        //
+      $kabupaten = Kabupaten::lists('nama_kabupaten','id_kabupaten');
+
+      $pengasuh = Pengasuh::lists('nama_pengasuh','id_pengasuh');
+
+      return view('pesantren.create',compact('kabupaten','pengasuh'));
     }
 
     /**
@@ -34,9 +43,13 @@ class PesantrenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PesantrenRequest $request)
     {
-        //
+      Pesantren::create($request->all());
+
+      \Session::flash('pesan','Pesantren baru telah berhasil dimasukan!');
+
+      return redirect('admin/pesantren');
     }
 
     /**
@@ -58,7 +71,13 @@ class PesantrenController extends Controller
      */
     public function edit($id)
     {
-        //
+      $pesantren = Pesantren::findOrFail($id);
+
+      $kabupaten = Kabupaten::lists('nama_kabupaten','id_kabupaten');
+
+      $pengasuh = Pengasuh::lists('nama_pengasuh','id_pengasuh');
+
+      return view('pesantren.edit',compact('kabupaten','pengasuh','pesantren'));
     }
 
     /**
@@ -68,9 +87,15 @@ class PesantrenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PesantrenRequest $request, $id)
     {
-        //
+      $pesantren = Pesantren::findOrFail($id);
+
+      //Save record to the database
+      $pesantren->update($request->all());
+
+      //Return to universities controller
+      return redirect('admin/pesantren');
     }
 
     /**
@@ -81,6 +106,8 @@ class PesantrenController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Pesantren::destroy($id);
+
+      return redirect('admin/pesantren');
     }
 }

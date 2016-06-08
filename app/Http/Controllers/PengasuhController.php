@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Pengasuh;
+use App\Http\Requests\PengasuhRequest;
 
 class PengasuhController extends Controller
 {
@@ -15,7 +16,9 @@ class PengasuhController extends Controller
      */
     public function index()
     {
-        //
+      $pengasuh = Pengasuh::all();
+      //$prov = Provinsi::all();
+      return view('pengasuh.pengasuh', compact('pengasuh'));
     }
 
     /**
@@ -25,7 +28,9 @@ class PengasuhController extends Controller
      */
     public function create()
     {
-        //
+        $jabatan = array('Pimpinan','Ketua Yayasan','Pendiri');
+
+        return view('pengasuh.create',compact('jabatan'));
     }
 
     /**
@@ -34,9 +39,13 @@ class PengasuhController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PengasuhRequest $request)
     {
-        //
+      Pengasuh::create($request->all());
+
+      \Session::flash('pesan','Pengasuh baru telah berhasil dimasukan!');
+
+      return redirect('admin/pengasuh');
     }
 
     /**
@@ -58,7 +67,11 @@ class PengasuhController extends Controller
      */
     public function edit($id)
     {
-        //
+      $pengasuh = Pengasuh::findOrFail($id);
+
+      $jabatan = array('Pimpinan','Ketua Yayasan','Pendiri');
+
+      return view('pengasuh.edit', compact('pengasuh','jabatan'));
     }
 
     /**
@@ -68,9 +81,16 @@ class PengasuhController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PengasuhRequest $request, $id)
     {
-        //
+      //Find or Fail to get ID
+      $pengasuh = Pengasuh::findOrFail($id);
+
+      //Save record to the database
+      $pengasuh->update($request->all());
+
+      //Return to universities controller
+      return redirect('admin/pengasuh');
     }
 
     /**
@@ -81,6 +101,8 @@ class PengasuhController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Pengasuh::destroy($id);
+
+      return redirect('admin/pengasuh');
     }
 }

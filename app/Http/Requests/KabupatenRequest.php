@@ -13,7 +13,7 @@ class KabupatenRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class KabupatenRequest extends Request
     public function rules()
     {
         return [
-            //
+            'nama_kabupaten' => 'required'
         ];
     }
+
+    public function messages()
+  	{
+  		return [
+  			'nama_kabupaten.required' => 'Nama Kabupaten tidak boleh kosong'
+  		];
+  	}
 }

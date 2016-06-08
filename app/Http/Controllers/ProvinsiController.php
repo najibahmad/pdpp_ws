@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Provinsi;
+use App\Http\Requests\ProvinsiRequest;
+
 class ProvinsiController extends Controller
 {
     /**
@@ -15,7 +18,9 @@ class ProvinsiController extends Controller
      */
     public function index()
     {
-        //
+      $prov = Provinsi::all();
+      $counter = 0;
+      return view('provinsi.prov', compact('prov', 'counter'));
     }
 
     /**
@@ -25,7 +30,7 @@ class ProvinsiController extends Controller
      */
     public function create()
     {
-        //
+        return view('provinsi.create');
     }
 
     /**
@@ -34,9 +39,13 @@ class ProvinsiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProvinsiRequest $request)
     {
-        //
+        Provinsi::create($request->all());
+
+        \Session::flash('pesan','Provinsi baru telah berhasil dimasukan!');
+
+        return redirect('admin/provinsi');
     }
 
     /**
@@ -58,7 +67,9 @@ class ProvinsiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prov = Provinsi::findOrFail($id);
+
+        return view('provinsi.edit', compact('prov'));
     }
 
     /**
@@ -68,9 +79,16 @@ class ProvinsiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProvinsiRequest $request, $id)
     {
-        //
+        //Find or Fail to get ID
+        $prov = Provinsi::findOrFail($id);
+
+        //Save record to the database
+        $prov->update($request->all());
+
+        //Return to universities controller
+        return redirect('admin/provinsi');
     }
 
     /**
@@ -81,6 +99,8 @@ class ProvinsiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Provinsi::destroy($id);
+
+        return redirect('admin/provinsi');
     }
 }
