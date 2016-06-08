@@ -9,6 +9,13 @@
 
                 <div class="panel-body">
                     Your Application's Landing Page.
+
+                    <ul>
+                        <li><a href="{{ url('/admin/provinsi') }}">  Provinsi</a></li>
+                        <li><a href="{{ url('/admin/kabupaten') }}">  Kabupaten</a></li>
+                        <li><a href="{{ url('/admin/pengasuh') }}">  Pengasuh</a></li>
+                        <li><a href="{{ url('/admin/pesantren') }}">  Pesantren</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
