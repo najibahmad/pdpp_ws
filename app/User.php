@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama_pengguna', 'email_pengguna', 'token','password','role',
+        'nama_pengguna', 'email_pengguna', 'token','password','hak_akses',
     ];
 
     /**
@@ -30,4 +30,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isAdmin()
+  	{
+  		return $this->hak_akses == '255';
+  	}
 }

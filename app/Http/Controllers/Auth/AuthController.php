@@ -28,8 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
-
+      protected $redirectTo = '/';
     /**
      * Create a new authentication controller instance.
      *
@@ -46,14 +45,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'nama_pengguna' => 'required|max:255',
-            'email_pengguna' => 'required|email|max:255|unique:pengguna',
-            'password' => 'required|min:6|confirmed',
-        ]);
-    }
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'nama_pengguna' => 'required|max:255',
+    //         'email_pengguna' => 'required|email|max:255|unique:pengguna',
+    //         'password' => 'required|min:6|confirmed',
+    //     ]);
+    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -61,14 +60,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'nama_pengguna' => $data['nama_pengguna'],
-            'email_pengguna' => $data['email_pengguna'],
-            'password' => bcrypt($data['password']),
-        ]);
-    }
+    // protected function create(array $data)
+    // {
+    //     return User::create([
+    //         'nama_pengguna' => $data['nama_pengguna'],
+    //         'email_pengguna' => $data['email_pengguna'],
+    //         'password' => bcrypt($data['password']),
+    //     ]);
+    // }
 
     /**
      * Override method AuthenticatesUsers.php
@@ -78,7 +77,27 @@ class AuthController extends Controller
      */
     public function loginUsername()
     {
-        return property_exists($this, 'nama_pengguna') ? $this->username : 'email_pengguna';
+        return property_exists($this, 'nama_pengguna') ? $this->nama_pengguna : 'email_pengguna';
     }
 
+    public function register() {
+        return redirect('/');
+    }
+
+    public function showRegistrationForm() {
+        return redirect('/');
+    }
+
+    public function showLoginForm()
+    {
+        if(!session()->has('from')){
+            session()->put('from', url()->previous());
+        }
+        return view('auth.login');
+    }
+
+    public function authenticated($request,$user)
+    {
+        return redirect(session()->pull('from',$this->redirectTo));
+    }
 }
