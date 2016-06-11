@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Provinsi;
+use App\Pesantren;
 use App\Http\Requests\ProvinsiRequest;
 
 class ProvinsiController extends Controller
@@ -18,9 +19,22 @@ class ProvinsiController extends Controller
      */
     public function home()
     {
-      $prov = Provinsi::all();
-      $counter = 0;
-      return view('provinsi.index', compact('prov', 'counter'));
+      // $nama_provinsi = [];
+      // $jmlpesantrens = [];
+      // foreach (Pesantren::all() as $pesantren) {
+      //     array_push($nama_provinsi, $pesantren->kabupaten->provinsi->nama_provinsi);
+      //     array_push($jmlpesantrens, $pesantren->kabupaten->provinsi->count());
+      // }
+
+      $nama_provinsi = [];
+      $jmlpesantrens = [];
+      foreach (Provinsi::all() as $kabupaten) {
+          array_push($nama_provinsi, $kabupaten->nama_provinsi);
+          array_push($jmlpesantrens, $kabupaten->kabupatens->count());
+      }
+      //dd($nama_provinsi,$jmlpesantrens);
+
+      return view('provinsi.index', compact('nama_provinsi', 'jmlpesantrens'));
     }
 
     /**
