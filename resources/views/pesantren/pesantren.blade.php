@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layout')
 
 @section('css')
     <!-- DataTables CSS -->
@@ -11,14 +11,14 @@
 @section('content')
 
 <div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 				<h1 class="page-header">Daftar Pondok Pesantren</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 <div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="panel panel-default">
 <!-- 						<div class="panel-heading">
 								Kode dan Nama Provinsi
@@ -26,7 +26,7 @@
 						</div>
  -->						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<div class="col-md-2 col-md-offset-5">
+							<div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5 col-sm-offset-3 col-xs-offset-1 bottom10">
 								<a class="btn btn-success" href="{!! URL::to('admin/pesantren/create') !!}"><i class="fa fa-floppy-o fa-fw"></i> Tambah Pesantren</a>
 							</div>
 								<div class="dataTable_wrapper">

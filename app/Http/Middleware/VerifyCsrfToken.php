@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'admin/kabupaten/delete/*','admin/provinsi/delete/*',
-        'admin/pengasuh/delete/*','admin/pesantren/delete/*'
+        'admin/pengasuh/delete/*','admin/pesantren/delete/*',
+        'api/v1/*',
     ];
 }

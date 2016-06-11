@@ -1,24 +1,23 @@
-@extends('layouts.app')
+@extends('admin.layout')
 
 @section('css')
     <!-- DataTables CSS -->
-    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
-    <link href="/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
+    <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
 
 <div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 				<h1 class="page-header">Daftar Provinsi</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 <div class="row">
-		<div class="col-lg-12">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="panel panel-default">
 <!-- 						<div class="panel-heading">
 								Kode dan Nama Provinsi
@@ -26,7 +25,7 @@
 						</div>
  -->						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<div class="col-md-2 col-md-offset-5">
+							<div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5 col-sm-offset-3 col-xs-offset-1 bottom10">
 								<a class="btn btn-success" href="{!! URL::to('admin/provinsi/create') !!}"><i class="fa fa-floppy-o fa-fw"></i> Tambah Provinsi</a>
 							</div>
 								<div class="dataTable_wrapper">
@@ -44,10 +43,10 @@
 													<td class="center col-xs-1">
 														{{ $provinsi->id_provinsi }}
 												  </td>
-													<td class="center col-md-1">
+													<td class="center col-md-6">
 														{{ $provinsi->nama_provinsi }}
 												  </td>
-													<td class="center col-md-1">
+													<td class="center col-sm-2">
 															<a class="btn btn-xs btn-success" href="{{ URL::to('admin/provinsi/'.$provinsi->id_provinsi.'/edit') }}"><i class="fa fa-edit fa-fw"></i> Edit</a>
 															&nbsp;&nbsp;
 															<a class="btn btn-xs btn-danger" href="{{ URL::to('admin/provinsi/delete/'.$provinsi->id_provinsi) }}" data-token="{{csrf_token()}}" data-method="delete" data-confirm="Anda yakin menghapus data Provinsi?"><i class="fa fa-remove fa-fw"></i> Hapus</a>
@@ -70,8 +69,8 @@
 
 @section('script')
 	<!-- DataTables JavaScript -->
-  <script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-  <script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+  <script src="{{ asset('bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
@@ -100,6 +99,6 @@
 	</script>
 
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
-  <script src="/js/laravel.js" type="text/javascript"></script>
+  <script src="{{ asset('js/laravel.js') }}"></script>
 
 @endsection

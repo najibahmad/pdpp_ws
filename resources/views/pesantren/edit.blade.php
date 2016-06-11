@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layout')
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="row top20">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Nama Pesantren</div>
                 <div class="panel-body">

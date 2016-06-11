@@ -16,6 +16,18 @@ class ProvinsiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function home()
+    {
+      $prov = Provinsi::all();
+      $counter = 0;
+      return view('provinsi.index', compact('prov', 'counter'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
       $prov = Provinsi::all();
