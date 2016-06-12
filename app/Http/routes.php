@@ -13,10 +13,18 @@
 
 Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
 {
-    Route::post('pesantrens','APIPesantrenController@pesantrenList');
-    Route::post('pesantren/{nspp}','APIPesantrenController@pesantrenByNspp');
-    Route::post('provinsi','APIPesantrenController@listProvinsi');
-    Route::post('kabupaten/{provinsi}','APIPesantrenController@listKabupaten');
+    // route for list
+    Route::post('list/provinsi','APIPesantrenController@listProvinsi');
+    Route::post('list/kabupaten/','APIPesantrenController@listKabupaten');
+    Route::post('list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
+    Route::post('list/pesantren/{ID_KAB}','APIPesantrenController@listPesantrenByIdKabupaten');
+    Route::post('profil/{ID_PES}','APIPesantrenController@detailPesantren');
+
+    // route for search
+    Route::post('search/{TEXT}','APIPesantrenController@pesantrenSearchByText');
+    Route::post('search/{TEXT}/provinsi/{ID_PROV}','APIPesantrenController@pesantrenSearchByTextAndProvinsi');
+    Route::post('search/{TEXT}/kabupaten/{ID_KAB}','APIPesantrenController@pesantrenSearchByTextAndKabupaten');
+
     //Route::get('users', 'UserController');
     //Route::resource('categories', 'CategoryController');
 });
@@ -30,7 +38,8 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+// Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+Route::group(array('prefix' => 'admin'), function()
 {
     Route::get('/','ProvinsiController@home');
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);

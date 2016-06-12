@@ -21,9 +21,11 @@ class ProvinsiController extends Controller
     {
       // $nama_provinsi = [];
       // $jmlpesantrens = [];
-      // foreach (Pesantren::all() as $pesantren) {
+      // foreach (Provinsi::all() as $pesantren) {
       //     array_push($nama_provinsi, $pesantren->kabupaten->provinsi->nama_provinsi);
-      //     array_push($jmlpesantrens, $pesantren->kabupaten->provinsi->count());
+      //     foreach ($pesantren->kabupaten->provinsi->id_provinsi){
+      //         array_push($jmlpesantrens, $pesantren->kabupaten->count());
+      //     }
       // }
 
       $nama_provinsi = [];
