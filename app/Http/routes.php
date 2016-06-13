@@ -14,16 +14,16 @@
 Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
 {
     // route for list
-    Route::post('list/provinsi','APIPesantrenController@listProvinsi');
-    Route::post('list/kabupaten/','APIPesantrenController@listKabupaten');
-    Route::post('list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
-    Route::post('list/pesantren/{ID_KAB}','APIPesantrenController@listPesantrenByIdKabupaten');
-    Route::post('profil/{ID_PES}','APIPesantrenController@detailPesantren');
+    Route::post('{TOKEN}/list/provinsi','APIPesantrenController@listProvinsi');
+    Route::post('{TOKEN}/list/kabupaten/','APIPesantrenController@listKabupaten');
+    Route::post('{TOKEN}/list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
+    Route::post('{TOKEN}/list/pesantren/{ID_KAB}','APIPesantrenController@listPesantrenByIdKabupaten');
+    Route::post('{TOKEN}/profil/{ID_PES}','APIPesantrenController@detailPesantren');
 
     // route for search
-    Route::post('search/{TEXT}','APIPesantrenController@pesantrenSearchByText');
-    Route::post('search/{TEXT}/provinsi/{ID_PROV}','APIPesantrenController@pesantrenSearchByTextAndProvinsi');
-    Route::post('search/{TEXT}/kabupaten/{ID_KAB}','APIPesantrenController@pesantrenSearchByTextAndKabupaten');
+    Route::post('{TOKEN}/search/{TEXT}','APIPesantrenController@pesantrenSearchByText');
+    Route::post('{TOKEN}/search/{TEXT}/provinsi/{ID_PROV}','APIPesantrenController@pesantrenSearchByTextAndProvinsi');
+    Route::post('{TOKEN}/search/{TEXT}/kabupaten/{ID_KAB}','APIPesantrenController@pesantrenSearchByTextAndKabupaten');
 
     //Route::get('users', 'UserController');
     //Route::resource('categories', 'CategoryController');
@@ -37,9 +37,8 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-
-// Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
-Route::group(array('prefix' => 'admin'), function()
+//Route::group(array('prefix' => 'admin'), function()
+Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
 {
     Route::get('/','ProvinsiController@home');
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
