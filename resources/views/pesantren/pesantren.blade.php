@@ -36,10 +36,14 @@
 													<th>No</th>
 													<th>NSPP</th>
                           <th>Nama Pesantren</th>
-                          <th>Jumlah Santri</th>
+                          <th>Alamat</th>
                           <th>Nama Pengasuh</th>
-                          <th>Lokasi Kabupaten</th>
-                          <th>Lokasi Provinsi</th>
+                          <th>Jumlah Santri</th>
+                          <!--
+                          <th>Jumlah Santri Mukim</th>
+                          <th>No Telepon</th>
+                          <th>Website</th>
+                          -->
 													<th>Aksi</th>
 												</tr>
 											</thead>
@@ -56,18 +60,26 @@
 														{{ $pes->nama_pesantren }}
 												  </td>
                           <td class="center col-md-1">
-														{{ $pes->jumlah_santri }}
-												  </td>
-                          <td class="center col-md-1">
-														{{ $pes->pengasuh->nama_pengasuh }}
-												  </td>
-                          <td class="center col-md-1">
-														{{ $pes->kabupaten->nama_kabupaten }}
-												  </td>
-                          <td class="center col-md-1">
 														{{ $pes->kabupaten->provinsi->nama_provinsi }}
 												  </td>
-													<td class="center col-md-1">
+                          <td class="center col-md-1">
+														{{ $pes->nama_pengasuh }}
+												  </td>
+                          <td class="center col-md-1">
+														{{ $pes->jumlah_santri }}
+												  </td>
+                          <!--
+                          <td class="center col-md-1">
+														{{ $pes->jumlah_santri_mukim }}
+												  </td>
+                          <td class="center col-md-1">
+														{{ $pes->no_telepon }}
+												  </td>
+                          <td class="center col-md-1">
+														{{ $pes->website }}
+												  </td>
+                          -->
+													<td class="center col-xs-2">
 															<a class="btn btn-xs btn-success" href="{{ URL::to('admin/pesantren/'.$pes->id_pesantren.'/edit') }}"><i class="fa fa-edit fa-fw"></i> Edit</a>
 															&nbsp;&nbsp;
 															<a class="btn btn-xs btn-danger" href="{{ URL::to('admin/pesantren/delete/'.$pes->id_pesantren) }}" data-token="{!! csrf_token() !!} " data-method="delete" data-confirm="Anda yakin menghapus data Pesantren?"><i class="fa fa-remove fa-fw"></i> Hapus</a>
