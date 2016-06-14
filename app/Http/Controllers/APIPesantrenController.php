@@ -30,7 +30,11 @@ class APIPesantrenController extends Controller
     {
       if($this->cek_token($token))
       {
-        $kabupaten = Kabupaten::all('id_kabupaten', 'nama_kabupaten');
+        $kabupaten = DB::table('kabupaten')
+                    ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+                    ->select('id_kabupaten', 'nama_kabupaten','nama_provinsi')
+                    ->get();
+
         return response()->json(array("data" => $kabupaten));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
@@ -43,7 +47,7 @@ class APIPesantrenController extends Controller
         $kabupaten = DB::table('kabupaten')
                     ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
                     ->where('kabupaten.provinsi_id_provinsi', '=', $id_provinsi)
-                    //->select('id_kabupaten','nama_kabupaten','nama_provinsi')
+                    ->select('id_kabupaten','nama_kabupaten','nama_provinsi')
                     ->get();
 
         return response()->json(array("data" => $kabupaten));
@@ -60,6 +64,22 @@ class APIPesantrenController extends Controller
                     ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
                     ->where('pesantren.kabupaten_id_kabupaten', '=', $id_kabupaten)
                     //->select('id_pesantren','nama_pesantren','nama_kabupaten','nama_provinsi')
+                    ->get();
+
+        return response()->json(array("data" => $kabupaten));
+      }
+      return response()->json(array("data" => "Anda tidak memiliki akses."));
+    }
+
+    public function listPesantrenAll($token)
+    {
+      if($this->cek_token($token))
+      {
+        $kabupaten = DB::table('pesantren')
+                    ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+                    ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+                    //->select('id_pesantren','nama_pesantren','nama_kabupaten','nama_provinsi')
+                    ->select('id_pesantren','nama_pesantren')
                     ->get();
 
         return response()->json(array("data" => $kabupaten));
@@ -87,7 +107,12 @@ class APIPesantrenController extends Controller
     {
       if($this->cek_token($token))
       {
-        $pesantren = Pesantren::search($text)->get();
+        // $pesantren = Pesantren::search($text)->get();
+        $pesantren = DB::table('pesantren')
+                    ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+                    ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+                    ->select('id_pesantren','nama_pesantren','nama_kabupaten','nama_provinsi')
+                    ->get();
 
         return response()->json(array("data" => $pesantren));
       }
