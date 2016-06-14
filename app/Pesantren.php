@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
+use Aloko\Elasticquent\ElasticquentTrait;
+
 
 class Pesantren extends Model
 {
-    use SearchableTrait;
+//    use SearchableTrait;
 
     protected $table='pesantren';
 
@@ -24,16 +26,62 @@ class Pesantren extends Model
      *
      * @var array
      */
-    protected $searchable = [
-        'columns' => [
-            'pesantren.nama_pesantren' => 10,
-            'pesantren.NSPP' => 10,
+//    protected $searchable = [
+//        'columns' => [
+//            'pesantren.nama_pesantren' => 10,
+//            'pesantren.NSPP' => 10,
+//        ],
+//        'joins' => [
+//            'kabupaten' => ['pesantren.kabupaten_id_kabupaten','kabupaten.id_kabupaten'],
+//            'provinsi' => ['kabupaten.provinsi_id_provinsi','provinsi.id_provinsi']
+//        ],
+//    ];
+
+
+    use ElasticquentTrait;
+
+    private $mapProps = array(
+        'NSPP' =>[
+            'type' => 'string',
+            "analyzer" => "standard",
         ],
-        'joins' => [
-            'kabupaten' => ['pesantren.kabupaten_id_kabupaten','kabupaten.id_kabupaten'],
-            'provinsi' => ['kabupaten.provinsi_id_provinsi','provinsi.id_provinsi']
+        'nama_pesantren' =>[
+            'type' => 'string',
+            "analyzer" => "standard",
         ],
-    ];
+    );
+
+    private $customAnalyzer = array(
+        'myAnalyzer' => [
+            'type' => 'stop',
+            "stopword" => [","]
+        ]
+    );
+
+    public static function createIndexWithCustomAnalyzer($shards = null, $replicas = null){
+        $instance = new static;
+        $client = $instance->getElasticSearchClient();
+
+        $params = [
+            'index' => 'default',
+            'body' => [
+                'settings' =>[
+                    'number_of_shards' => $shards,
+                    'number_of_replicas' => $replicas,
+                    'analysis' => [
+                        'analyzer' => $instance->customAnalyzer,
+                    ]
+                ],
+                'mappings' => [
+                    'pesantren' => [
+                        'properties' => $instance->mapProps,
+                    ],
+                ]
+            ]
+        ];
+
+        return $client->indices()->create($params);
+    }
 
     public function kabupaten()
   	{
@@ -54,4 +102,6 @@ class Pesantren extends Model
     //     return $this->hasManyThrough('App\Pesantren', 'App\Kabupaten',
     //         'id_provinsi', 'id_kabupaten', 'id_pesantren');
     // }
+
+
 }

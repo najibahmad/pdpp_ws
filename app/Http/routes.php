@@ -38,7 +38,8 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 //Route::group(array('prefix' => 'admin'), function()
-Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+//Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+Route::group(array('prefix' => 'admin'), function()
 {
     Route::get('/','ProvinsiController@home');
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
@@ -52,3 +53,4 @@ Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), functi
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
     Route::delete('pengguna/delete/{pengguna}','PenggunaController@destroy');
 });
+
