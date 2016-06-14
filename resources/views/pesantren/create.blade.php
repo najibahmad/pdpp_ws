@@ -1,5 +1,10 @@
 @extends('admin.layout')
 
+@section('css')
+  <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/selectize.bootstrap3.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row top20">
@@ -131,7 +136,7 @@
                       		<label for="nama_kabupaten" class="col-md-4 control-label">Kabupaten</label>
 
                       		<div class="col-md-6">
-                      				{!! Form::select('kabupaten_id_kabupaten', $kabupaten, null,['class' => 'form-control']) !!}
+                      				{!! Form::select('kabupaten_id_kabupaten', $kabupaten, null,['class' => 'kabupaten form-control', 'placeholder' => 'Pilih Kabupaten']) !!}
 
                       				@if ($errors->has('nama_kabupaten'))
                       						<span class="help-block">
@@ -156,4 +161,20 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+  <script src="{{ asset('js/selectize.min.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      $('.kabupaten').selectize({
+        create: true,
+        sortField: {
+            field: 'text',
+            direction: 'asc'
+        },
+        dropdownParent: 'body'
+      });
+    });
+  </script>
 @endsection
