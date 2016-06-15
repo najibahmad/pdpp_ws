@@ -5,6 +5,7 @@
       <link href="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
       <!-- DataTables Responsive CSS -->
       <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
+      <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -106,31 +107,57 @@
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
-	$(document).ready(function() {
+  $(document).ready(function() {
 			$('#tabel-provinsi').DataTable({
-					responsive: true,
-          language: {
-            "sProcessing":   "Sedang memproses...",
-            "sLengthMenu":   "Tampilkan _MENU_ entri",
-            "sZeroRecords":  "Tidak ditemukan data yang sesuai",
-            "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-            "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
-            "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-            "sInfoPostFix":  "",
-            "sSearch":       "Cari:",
-            "sUrl":          "",
-            "oPaginate": {
-                "sFirst":    "Pertama",
-                "sPrevious": "Sebelumnya",
-                "sNext":     "Selanjutnya",
-                "sLast":     "Terakhir"
-            }
-          }
+							responsive: true,
+              language: {
+                "sProcessing":   "Sedang memproses...",
+                "sLengthMenu":   "Tampilkan _MENU_ entri",
+                "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+                "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+                "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+                "sInfoPostFix":  "",
+                "sSearch":       "Cari:",
+                "sUrl":          "",
+                "oPaginate": {
+                    "sFirst":    "Pertama",
+                    "sPrevious": "Sebelumnya",
+                    "sNext":     "Selanjutnya",
+                    "sLast":     "Terakhir"
+                }
+              },
+              "columnDefs": [
+                { "orderable": false, "targets": 0 }
+              ],
+              dom: 'Bfrtip',
+              buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Simpan Excel',
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Simpan PDF',
+                },
+                {
+                    extend: 'print',
+                    text: 'Cetak Data',
+                }
+              ]
 			});
 	});
 	</script>
 
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
   <script src="{{ asset('js/laravel.js') }}"></script>
+
+  <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
+  <script src="{{ asset('js/jszip.min.js') }}"></script>
+  <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+  <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+  <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+  <script src="{{ asset('js/buttons.print.min.js ') }}"></script>
 
 @endsection
