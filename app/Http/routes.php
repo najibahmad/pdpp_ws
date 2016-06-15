@@ -18,6 +18,7 @@ Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
     Route::post('{TOKEN}/list/kabupaten/','APIPesantrenController@listKabupaten');
     Route::post('{TOKEN}/list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
     Route::post('{TOKEN}/list/pesantren/{ID_KAB}','APIPesantrenController@listPesantrenByIdKabupaten');
+    Route::post('{TOKEN}/list/pesantren','APIPesantrenController@listPesantrenAll');
     Route::post('{TOKEN}/profil/{ID_PES}','APIPesantrenController@detailPesantren');
 
     // route for search
@@ -52,5 +53,10 @@ Route::group(array('prefix' => 'admin'), function()
     Route::delete('pesantren/delete/{pesantren}','PesantrenController@destroy');
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
     Route::delete('pengguna/delete/{pengguna}','PenggunaController@destroy');
+
+    Route::get('/pesbyprov','LaporanController@pesantrenByProvinsi');
+    Route::post('/pesbyprov','LaporanController@pesantrenByProvinsi2');
+    Route::get('/pesbykab','LaporanController@pesantrenByKabupaten');
+    Route::post('/pesbykab','LaporanController@pesantrenByKabupaten2');
 });
 

@@ -36,7 +36,7 @@ class ProvinsiController extends Controller
       }
       //dd($nama_provinsi,$jmlpesantrens);
 
-      return view('provinsi.index', compact('nama_provinsi', 'jmlpesantrens'));
+      return view('admin.index', compact('nama_provinsi', 'jmlpesantrens'));
     }
 
     /**
