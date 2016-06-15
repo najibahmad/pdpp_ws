@@ -8,12 +8,16 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "^5.2",
+<<<<<<< HEAD
         "nicolaslopezj/searchable": "1.*",
 <<<<<<< HEAD
         "maatwebsite/excel": "~2.1"
 =======
         "aloko/elasticquent5": "dev-master"
 >>>>>>> refs/remotes/origin/elasticsearch-playground
+=======
+        "nicolaslopezj/searchable": "1.*"
+>>>>>>> parent of 9e4c26a... Inisialisasi tampilan (menggabungkan Desain rasyid ke laravel)
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
