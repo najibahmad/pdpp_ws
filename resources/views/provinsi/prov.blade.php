@@ -5,6 +5,7 @@
     <link href="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -74,7 +75,7 @@
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
-	$(document).ready(function() {
+  $(document).ready(function() {
 			$('#tabel-provinsi').DataTable({
 							responsive: true,
               language: {
@@ -93,12 +94,38 @@
                     "sNext":     "Selanjutnya",
                     "sLast":     "Terakhir"
                 }
-              }
+              },
+              "columnDefs": [
+                { "orderable": false, "targets": 0 }
+              ],
+              dom: 'Bfrtip',
+              buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Simpan Excel',
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Simpan PDF',
+                },
+                {
+                    extend: 'print',
+                    text: 'Cetak Data',
+                }
+              ]
 			});
 	});
 	</script>
 
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
   <script src="{{ asset('js/laravel.js') }}"></script>
+
+  <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
+  <script src="{{ asset('js/jszip.min.js') }}"></script>
+  <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+  <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+  <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+  <script src="{{ asset('js/buttons.print.min.js ') }}"></script>
 
 @endsection
