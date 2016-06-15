@@ -16,5 +16,3 @@ storage/
 *.lock
 composer.lock
 composer.lock
-composer.lock
-*.lock
