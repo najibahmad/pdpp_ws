@@ -13,10 +13,19 @@
 
 Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
 {
-    Route::post('pesantrens','APIPesantrenController@pesantrenList');
-    Route::post('pesantren/{nspp}','APIPesantrenController@pesantrenByNspp');
-    Route::post('provinsi','APIPesantrenController@listProvinsi');
-    Route::post('kabupaten/{provinsi}','APIPesantrenController@listKabupaten');
+    // route for list
+    Route::post('{TOKEN}/list/provinsi','APIPesantrenController@listProvinsi');
+    Route::post('{TOKEN}/list/kabupaten/','APIPesantrenController@listKabupaten');
+    Route::post('{TOKEN}/list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
+    Route::post('{TOKEN}/list/pesantren/{ID_KAB}','APIPesantrenController@listPesantrenByIdKabupaten');
+    Route::post('{TOKEN}/list/pesantren','APIPesantrenController@listPesantrenAll');
+    Route::post('{TOKEN}/profil/{ID_PES}','APIPesantrenController@detailPesantren');
+
+    // route for search
+    Route::post('{TOKEN}/search/{TEXT}','APIPesantrenController@pesantrenSearchByText');
+    Route::post('{TOKEN}/search/{TEXT}/provinsi/{ID_PROV}','APIPesantrenController@pesantrenSearchByTextAndProvinsi');
+    Route::post('{TOKEN}/search/{TEXT}/kabupaten/{ID_KAB}','APIPesantrenController@pesantrenSearchByTextAndKabupaten');
+
     //Route::get('users', 'UserController');
     //Route::resource('categories', 'CategoryController');
 });
@@ -43,4 +52,9 @@ Route::group(array('prefix' => 'admin'), function()
     Route::delete('pesantren/delete/{pesantren}','PesantrenController@destroy');
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
     Route::delete('pengguna/delete/{pengguna}','PenggunaController@destroy');
+
+    Route::get('/pesbyprov','LaporanController@pesantrenByProvinsi');
+    Route::post('/pesbyprov','LaporanController@pesantrenByProvinsi2');
+    Route::get('/pesbykab','LaporanController@pesantrenByKabupaten');
+    Route::post('/pesbykab','LaporanController@pesantrenByKabupaten2');
 });

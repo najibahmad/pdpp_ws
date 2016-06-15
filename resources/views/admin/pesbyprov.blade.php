@@ -6,19 +6,21 @@
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/selectize.bootstrap3.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-				<h2 class="page-header top15">Daftar Kabupaten</h2>
+		<div class="col-md-12 col-sm-12 col-xs-12">
+				<h2 class="page-header top15">Daftar Pesantren Berdasarkan Provinsi</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="panel panel-default">
 <!-- 						<div class="panel-heading">
 								Kode dan Nama Provinsi
@@ -26,36 +28,53 @@
 						</div>
  -->						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5 col-sm-offset-3 col-xs-offset-1 bottom10">
-								<a class="btn btn-success" href="{!! URL::to('admin/kabupaten/create') !!}"><i class="fa fa-floppy-o fa-fw"></i> Tambah Kabupaten</a>
+							<div class="row bottom10">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/pesbyprov') }}">
+                        {{ csrf_field() }}
+                        <div class="col-md-4 col-md-offset-4">
+                            {!! Form::select('provinsi_id_provinsi', $provinsi, 0,['class' => 'provinsi form-control', 'placeholder' => 'Pilih/Tulis Nama Provinsi' ]) !!}
+                        </div>
+                        <div class="col-md-6 col-md-offset-5">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-building"></i> Tampilkan
+                            </button>
+                        </div>
+
+                </form>
+
+                <br>
+                 <p class="navbar-text" align="center" style="font-size:14px"><b>Daftar Pesantren : {!! 554 !!}</b></p>
+                 <br>
 							</div>
 								<div class="dataTable_wrapper">
 										<table class="table table-striped table-bordered table-hover" id="tabel-provinsi">
 											<thead>
 												<tr>
 													<th>No</th>
-													<th>Nama Kabupaten</th>
-                          <th>Nama Provinsi</th>
-													<th>Aksi</th>
+													<th>Nama Pesantren</th>
+                          <th>Nama Pengasuh</th>
+                          <th>Jumlah Santri</th>
+                          <th>Kabupaten</th>
 												</tr>
 											</thead>
 											<tbody>
-												@foreach ($kab as $kabupaten)
+												@foreach ($pesantren as $pes)
 												<tr>
-													<td class="center col-xs-1">
-														{{ $kabupaten->id_kabupaten }}
+													<td class="col-xs-1">
+														{{ $counter = $counter+1 }}
 												  </td>
-													<td class="center col-md-1">
-														{{ $kabupaten->nama_kabupaten }}
+													<td class="col-md-3">
+														{{ $pes->nama_pesantren }}
 												  </td>
-                          <td class="center col-md-1">
-														{{ $kabupaten->provinsi->nama_provinsi }}
+                          <td class="col-md-3">
+														{{ $pes->nama_pengasuh }}
 												  </td>
-													<td class="center col-md-1">
-															<a class="btn btn-xs btn-success" href="{{ URL::to('admin/kabupaten/'.$kabupaten->id_kabupaten.'/edit') }}"><i class="fa fa-edit fa-fw"></i> Edit</a>
-															&nbsp;&nbsp;
-															<a class="btn btn-xs btn-danger" href="{{ URL::to('admin/kabupaten/delete/'.$kabupaten->id_kabupaten) }}" data-token="{!! csrf_token() !!} " data-method="delete" data-confirm="Anda yakin menghapus data Kabupaten?"><i class="fa fa-remove fa-fw"></i> Hapus</a>
-													</td>
+                          <td class="col-md-1">
+														{{ $pes->jumlah_santri }}
+												  </td>
+                          <td class="col-md-4">
+														{{ $pes->nama_kabupaten }}
+												  </td>
 												</tr>
 												@endforeach
 											</tbody>
@@ -102,6 +121,20 @@
 			});
 	});
 	</script>
+
+  <script src="{{ asset('js/selectize.min.js') }}"></script>
+  <script>
+    $(document).ready(function () {
+      $('.provinsi').selectize({
+        //create: true,
+        sortField: {
+            field: 'text',
+            direction: 'asc'
+        },
+        dropdownParent: 'body'
+      });
+    });
+  </script>
 
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
   <script src="{{ asset('js/laravel.js') }}"></script>

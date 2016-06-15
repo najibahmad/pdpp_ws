@@ -12,7 +12,7 @@
 </div>
 <!-- /.row -->
 <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-12 col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Grafik Pesantren Per Provinsi
@@ -25,6 +25,8 @@
         </div>
         <!-- /.panel -->
     </div>
+</div>
+<div class="row">
     <!-- /.col-lg-6 -->
     <div class="col-lg-6">
         <div class="panel panel-default">

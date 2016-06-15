@@ -1,11 +1,10 @@
 @extends('admin.layout')
 
 @section('css')
-    <!-- DataTables CSS -->
-    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-    <!-- DataTables Responsive CSS -->
-    <link href="/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
+      <!-- DataTables CSS -->
+      <link href="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
+      <!-- DataTables Responsive CSS -->
+      <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -36,10 +35,14 @@
 													<th>No</th>
 													<th>NSPP</th>
                           <th>Nama Pesantren</th>
-                          <th>Jumlah Santri</th>
+                          <th>Alamat</th>
                           <th>Nama Pengasuh</th>
-                          <th>Lokasi Kabupaten</th>
-                          <th>Lokasi Provinsi</th>
+                          <th>Jumlah Santri</th>
+                          <!--
+                          <th>Jumlah Santri Mukim</th>
+                          <th>No Telepon</th>
+                          <th>Website</th>
+                          -->
 													<th>Aksi</th>
 												</tr>
 											</thead>
@@ -56,18 +59,26 @@
 														{{ $pes->nama_pesantren }}
 												  </td>
                           <td class="center col-md-1">
-														{{ $pes->jumlah_santri }}
-												  </td>
-                          <td class="center col-md-1">
-														{{ $pes->pengasuh->nama_pengasuh }}
-												  </td>
-                          <td class="center col-md-1">
-														{{ $pes->kabupaten->nama_kabupaten }}
-												  </td>
-                          <td class="center col-md-1">
 														{{ $pes->kabupaten->provinsi->nama_provinsi }}
 												  </td>
-													<td class="center col-md-1">
+                          <td class="center col-md-1">
+														{{ $pes->nama_pengasuh }}
+												  </td>
+                          <td class="center col-md-1">
+														{{ $pes->jumlah_santri }}
+												  </td>
+                          <!--
+                          <td class="center col-md-1">
+														{{ $pes->jumlah_santri_mukim }}
+												  </td>
+                          <td class="center col-md-1">
+														{{ $pes->no_telepon }}
+												  </td>
+                          <td class="center col-md-1">
+														{{ $pes->website }}
+												  </td>
+                          -->
+													<td class="center col-xs-2">
 															<a class="btn btn-xs btn-success" href="{{ URL::to('admin/pesantren/'.$pes->id_pesantren.'/edit') }}"><i class="fa fa-edit fa-fw"></i> Edit</a>
 															&nbsp;&nbsp;
 															<a class="btn btn-xs btn-danger" href="{{ URL::to('admin/pesantren/delete/'.$pes->id_pesantren) }}" data-token="{!! csrf_token() !!} " data-method="delete" data-confirm="Anda yakin menghapus data Pesantren?"><i class="fa fa-remove fa-fw"></i> Hapus</a>
@@ -90,8 +101,8 @@
 
 @section('script')
 	<!-- DataTables JavaScript -->
-  <script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-  <script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+  <script src="{{ asset('bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
@@ -120,6 +131,6 @@
 	</script>
 
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
-  <script src="/js/laravel.js" type="text/javascript"></script>
+  <script src="{{ asset('js/laravel.js') }}"></script>
 
 @endsection

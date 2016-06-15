@@ -18,4 +18,10 @@ class Provinsi extends Model
   	{
            return $this->hasMany('App\Kabupaten','provinsi_id_provinsi','id_provinsi');
     }
+
+    // public function pesantrens()
+    // {
+    //     return $this->hasManyThrough('App\Pesantren', 'App\Kabupaten',
+    //         'id_provinsi', 'id_kabupaten', 'id_pesantren');
+    // }
 }

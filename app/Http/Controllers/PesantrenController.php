@@ -18,7 +18,7 @@ class PesantrenController extends Controller
      */
     public function index()
     {
-      $pesantren = Pesantren::all();
+      $pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
       //$prov = Provinsi::all();
       return view('pesantren.pesantren', compact('pesantren'));
     }
@@ -32,9 +32,9 @@ class PesantrenController extends Controller
     {
       $kabupaten = Kabupaten::lists('nama_kabupaten','id_kabupaten');
 
-      $pengasuh = Pengasuh::lists('nama_pengasuh','id_pengasuh');
+      // $pengasuh = Pengasuh::lists('nama_pengasuh','id_pengasuh');
 
-      return view('pesantren.create',compact('kabupaten','pengasuh'));
+      return view('pesantren.create',compact('kabupaten'));
     }
 
     /**
@@ -75,9 +75,9 @@ class PesantrenController extends Controller
 
       $kabupaten = Kabupaten::lists('nama_kabupaten','id_kabupaten');
 
-      $pengasuh = Pengasuh::lists('nama_pengasuh','id_pengasuh');
+      // $pengasuh = Pengasuh::lists('nama_pengasuh','id_pengasuh');
 
-      return view('pesantren.edit',compact('kabupaten','pengasuh','pesantren'));
+      return view('pesantren.edit',compact('kabupaten','pesantren'));
     }
 
     /**
