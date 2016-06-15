@@ -38,9 +38,25 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+Route::get('/guest','GuestController@index');
+
+Route::get('/list','HomeController@listsearching');
+
+
+Route::group(array('prefix' => 'admin'), function()
+// Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+=======
 //Route::group(array('prefix' => 'admin'), function()
 //Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
 Route::group(array('prefix' => 'admin'), function()
+>>>>>>> refs/remotes/origin/elasticsearch-playground
+=======
+//Route::group(array('prefix' => 'admin'), function()
+Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+>>>>>>> parent of 9e4c26a... Inisialisasi tampilan (menggabungkan Desain rasyid ke laravel)
 {
     Route::get('/','ProvinsiController@home');
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
@@ -59,4 +75,3 @@ Route::group(array('prefix' => 'admin'), function()
     Route::get('/pesbykab','LaporanController@pesantrenByKabupaten');
     Route::post('/pesbykab','LaporanController@pesantrenByKabupaten2');
 });
-
