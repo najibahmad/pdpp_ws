@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+use App\Provinsi;
+use App\Kabupaten;
+
 class HomeController extends Controller
 {
     /**
@@ -12,10 +15,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -24,6 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('guest.index');
     }
+
+    public function listsearching()
+    {
+
+     $prov = Provinsi::lists('nama_provinsi','id_provinsi');
+
+     $kabupaten = Kabupaten::lists('nama_kabupaten','id_kabupaten');
+   
+     return view('guest.listsearching',compact('prov','kabupaten'));
+    // return view('guest.listsearching'); 
+    
+    }
+
+   
 }

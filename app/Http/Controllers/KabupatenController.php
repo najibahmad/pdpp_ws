@@ -33,7 +33,7 @@ class KabupatenController extends Controller
     {
       $prov = Provinsi::lists('nama_provinsi','id_provinsi');
 
-      return view('kabupaten.create',compact('prov'));
+      return view('kabupaten.create',compact('prov')); //
     }
 
     /**

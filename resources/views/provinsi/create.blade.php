@@ -5,7 +5,7 @@
     <div class="row top20">
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Membuat Provinsi Baru</div>
+                <div class="panel-heading">Pencarian Data Pesantren</div>
                 <div class="panel-body">
                   <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/provinsi') }}">
                       {{ csrf_field() }}
