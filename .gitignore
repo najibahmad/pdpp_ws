@@ -14,5 +14,3 @@ storage/
 .env.example
 .idea/
 *.lock
-composer.lock
-composer.lock
