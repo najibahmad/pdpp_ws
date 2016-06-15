@@ -9,7 +9,11 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "^5.2",
         "nicolaslopezj/searchable": "1.*",
+<<<<<<< HEAD
         "maatwebsite/excel": "~2.1"
+=======
+        "aloko/elasticquent5": "dev-master"
+>>>>>>> refs/remotes/origin/elasticsearch-playground
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

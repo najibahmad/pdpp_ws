@@ -2,9 +2,9 @@
 
 @section('css')
     <!-- DataTables CSS -->
-    <link href="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css') }}" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
-    <link href="/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -74,8 +74,8 @@
 
 @section('script')
 	<!-- DataTables JavaScript -->
-  <script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-  <script src="/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+  <script src="{{ asset('bower_components/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js') }}"></script>
 
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
@@ -104,6 +104,6 @@
 	</script>
 
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
-  <script src="/js/laravel.js" type="text/javascript"></script>
+  <script src="{{ asset('js/laravel.js') }}"></script>
 
 @endsection

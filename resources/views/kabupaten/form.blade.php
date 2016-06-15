@@ -14,7 +14,7 @@
 		<label for="nama_provinsi" class="col-md-4 control-label">Nama Provinsi</label>
 
 		<div class="col-md-6">
-				{!! Form::select('provinsi_id_provinsi', $prov, null,['class' => 'form-control']) !!}
+				{!! Form::select('provinsi_id_provinsi', $prov, null,['class' => 'provinsi form-control', 'placeholder' => 'Pilih Provinsi']) !!}
 
 				@if ($errors->has('nama_provinsi'))
 						<span class="help-block">

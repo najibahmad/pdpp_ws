@@ -119,7 +119,7 @@
 		<label for="nama_kabupaten" class="col-md-4 control-label">Kabupaten</label>
 
 		<div class="col-md-6">
-				{!! Form::select('kabupaten_id_kabupaten', $kabupaten, $pesantren->kabupaten_id_kabupaten,['class' => 'form-control']) !!}
+				{!! Form::select('kabupaten_id_kabupaten', $kabupaten, $pesantren->kabupaten_id_kabupaten,['class' => 'kabupaten form-control', 'placeholder' => 'Pilih Kabupaten']) !!}
 
 				@if ($errors->has('nama_kabupaten'))
 						<span class="help-block">

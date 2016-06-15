@@ -37,6 +37,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+<<<<<<< HEAD
 
 Route::get('/guest','GuestController@index');
 
@@ -45,6 +46,11 @@ Route::get('/list','HomeController@listsearching');
 
 Route::group(array('prefix' => 'admin'), function()
 // Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+=======
+//Route::group(array('prefix' => 'admin'), function()
+//Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+Route::group(array('prefix' => 'admin'), function()
+>>>>>>> refs/remotes/origin/elasticsearch-playground
 {
     Route::get('/','ProvinsiController@home');
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
