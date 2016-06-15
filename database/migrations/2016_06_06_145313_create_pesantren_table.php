@@ -24,9 +24,9 @@ class CreatePesantrenTable extends Migration
             $table->string('nama_pengasuh',50);
             $table->integer('jumlah_santri');
             $table->integer('jumlah_santri_mukim');
-            $table->index('kabupaten_id_kabupaten','fk_pesantren_kabupaten_idx');
-            $table->foreign('kabupaten_id_kabupaten')->references('id_kabupaten')->on('kabupaten');
-            $table->engine='InnoDB';
+            // $table->index('kabupaten_id_kabupaten','fk_pesantren_kabupaten_idx');
+            // $table->foreign('kabupaten_id_kabupaten')->references('id_kabupaten')->on('kabupaten');
+            // $table->engine='InnoDB';
         });
     }
 

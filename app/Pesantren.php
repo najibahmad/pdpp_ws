@@ -16,7 +16,7 @@ class Pesantren extends Model
     protected $primaryKey = 'id_pesantren';
 
     protected $fillable = [
-      'NSPP','nama_pesantren','jumlah_santri', 'kabupaten_id_kabupaten','pengasuh_id_pengasuh'
+        'NSPP','nama_pesantren','alamat_pesantren','kecamatan_pesantren','no_telepon','website','nama_pengasuh','jumlah_santri', 'jumlah_santri_mukim'
     ];
 
     /**
