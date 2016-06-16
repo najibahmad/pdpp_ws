@@ -61,15 +61,11 @@ Route::group(array('prefix' => 'admin'), function()
     Route::get('/pesbykab','LaporanController@pesantrenByKabupaten');
     Route::post('/pesbykab','LaporanController@pesantrenByKabupaten2');
     Route::get('/allpesantren','LaporanController@listPesantrenAll');
-
     Route::get('/exportpesantren','LaporanController@exportPesantren');
 
-    // Route::get('export/laporan',[
-    //     'as'=>'admin.export.laporan',
-    //     'uses'=>'LaporanController@export']);
-    // Route::post('export/laporan',[
-    //     'as'=>'admin.export.laporan.post',
-    //     'uses'=>'LaporanController@exportPesantren']);
+    Route::get('/exsportpes0pdf/{id_prov}','LaporanController@exportPesantrenByProvinsiPDF');
+    Route::get('/exsportpes0xls/{id_prov}','LaporanController@exportPesantrenByProvinsiEXL');
 
-    
+    Route::get('/exsportpes1pdf/{id_kab}','LaporanController@exportPesantrenByKabupatenPDF');
+    Route::get('/exsportpes1xls/{id_kab}','LaporanController@exportPesantrenByKabupatenEXl');
 });

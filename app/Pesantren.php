@@ -16,7 +16,9 @@ class Pesantren extends Model
     protected $primaryKey = 'id_pesantren';
 
     protected $fillable = [
-      'NSPP','nama_pesantren','jumlah_santri', 'kabupaten_id_kabupaten','pengasuh_id_pengasuh'
+      'NSPP','nama_pesantren','alamat_pesantren','kecamatan_pesantren',
+      'kabupaten_id_kabupaten','nama_pengasuh','jumlah_santri','jumlah_santri_mukim',
+      'no_telepon','website'
     ];
 
     /**
@@ -37,7 +39,7 @@ class Pesantren extends Model
 
     public function kabupaten()
   	{
-      return $this->belongsTo('App\Kabupaten','kabupaten_id_kabupaten');
+      return $this->belongsTo('App\Kabupaten','kabupaten_id_kabupaten','id_kabupaten');
     }
 
     // public function provinsi()

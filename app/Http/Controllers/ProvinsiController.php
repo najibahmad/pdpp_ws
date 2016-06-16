@@ -34,7 +34,6 @@ class ProvinsiController extends Controller
           array_push($nama_provinsi, $kabupaten->nama_provinsi);
           array_push($jmlpesantrens, $kabupaten->kabupatens->count());
       }
-      //dd($nama_provinsi,$jmlpesantrens);
 
       return view('admin.index', compact('nama_provinsi', 'jmlpesantrens'));
     }
