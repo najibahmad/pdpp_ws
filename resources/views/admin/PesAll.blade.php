@@ -14,29 +14,24 @@
 
 <div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-				<h2 class="page-header top15">Daftar Pesantren Berdasarkan Kabupaten</h2>
+				<h2 class="page-header top15">Daftar Seluruh Pesantren</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 </div>
-<!-- /.row -->
 <div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="row bottom10">
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/pesbykab') }}">
-                        {{ csrf_field() }}
-                        <div class="col-md-4 col-md-offset-4">
-                            {!! Form::select('kabupaten_id_kabupaten', $kabupaten, 0,['class' => 'kabupaten form-control', 'placeholder' => 'Pilih/Tulis Nama Kabupaten' ]) !!}
-                        </div>
-                        <div class="col-md-6 col-md-offset-5">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row bottom10">
+                
+                <div class="col-md-6 col-md-offset-5">
                             <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-building"></i> Tampilkan
+                                <i class="fa fa-btn fa-building"></i> Export Excel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-building"></i> Export PDF
                             </button>
                         </div>
-
-                </form>
-
                 <br>
                  <p class="navbar-text" align="center" style="font-size:14px"><b>Daftar Pesantren : {!! 554 !!}</b></p>
                  <br>
@@ -47,9 +42,9 @@
                       <thead>
 												<tr>
 													<th>No</th>
+                          <th>NSPP</th>
 													<th>Nama Pesantren</th>
                           <th>Nama Pengasuh</th>
-                          <th>Jumlah Santri</th>
                           <th>Detil</th>
 												</tr>
 											</thead>
@@ -60,13 +55,13 @@
 														{{ $counter = $counter+1 }}
 												  </td>
 													<td class="col-md-3">
+                            {{ $pes->NSPP }}
+                          </td>                          
+                          <td class="col-md-3">
 														{{ $pes->nama_pesantren }}
 												  </td>
                           <td class="col-md-3">
 														{{ $pes->nama_pengasuh }}
-												  </td>
-                          <td class="col-md-1">
-														{{ $pes->jumlah_santri }}
 												  </td>
                           <td class="col-md-4">
 														{{ 'Detil' }}
