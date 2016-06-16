@@ -47,8 +47,8 @@
               </div>
               <div class="row bottom10">
                 <p>
-                  <a class="btn btn-primary left10" href="{{ url('/admin/exsportpes1pdf/'.$id_kabupaten) }}"><i class="fa fa-file-pdf-o"></i> Export PDF</a>
-                  <a class="btn btn-primary left10" href="{{ url('/admin/exsportpes1xls/'.$id_kabupaten) }}"><i class="fa fa-file-excel-o"></i> Export Excel </a>
+                  <a class="btn btn-primary left7" href="{{ url('/admin/exsportpes1pdf/'.$id_kabupaten) }}"><i class="fa fa-file-pdf-o"></i>  Export PDF</a>
+                  <a class="btn btn-primary left7" href="{{ url('/admin/exsportpes1xls/'.$id_kabupaten) }}"><i class="fa fa-file-excel-o"></i>  Export Excel </a>
                 </p>
               </div>
 								<div class="dataTable_wrapper">

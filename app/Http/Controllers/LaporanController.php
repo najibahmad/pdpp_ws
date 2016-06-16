@@ -10,6 +10,7 @@ use App\Provinsi;
 use App\Kabupaten;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 use Auth;
 //use Input;
 // use Illuminate\Support\Facades\Input;
@@ -131,16 +132,23 @@ class LaporanController extends Controller
 
 
 
-    public function exportPesantrenByProvinsiPDF(Request $request)
+    public function exportPesantrenByProvinsiPDF($id_provinsi)
     {
-      $pesantren = DB::table('pesantren')
-              ->select(['pesantren.nama_pesantren', 'pesantren.nama_pengasuh', 'pesantren.jumlah_santri','kabupaten.nama_kabupaten'])
+      $prov = DB::table('provinsi')
+              ->where('id_provinsi', '=', $id_provinsi)
+              ->pluck('nama_provinsi');
+
+      $pesantrens = DB::table('pesantren')
+              //->select(['pesantren.nama_pesantren', 'pesantren.nama_pengasuh', 'pesantren.jumlah_santri','kabupaten.nama_kabupaten'])
               ->leftJoin('kabupaten', 'pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
               ->Join('provinsi', 'kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
               ->where('provinsi.id_provinsi',$id_provinsi)
               ->groupBy('pesantren.id_pesantren')
               //->paginate(15);
               ->get();
+      $row = 1;
+      $pdf = PDF::loadview('pdf.pesantrenprovinsi', compact('pesantrens','row','prov'))->setPaper('legal', 'landscape');
+      return $pdf->download('Data Pesantren Berdasarkan Provinsi.pdf');
 
     }
 
@@ -198,9 +206,25 @@ class LaporanController extends Controller
       })->export('xls');
     }
 
-    public function exportPesantrenByKabupatenPDF()
+    public function exportPesantrenByKabupatenPDF($id_kabupaten)
     {
+      $kab = DB::table('kabupaten')
+              ->where('id_kabupaten', '=', $id_kabupaten)
+              ->pluck('nama_kabupaten');
 
+      $prov = "";
+
+      $pesantrens = DB::table('pesantren')
+              //->select(['pesantren.nama_pesantren', 'pesantren.nama_pengasuh', 'pesantren.jumlah_santri','kabupaten.nama_kabupaten'])
+              ->Join('kabupaten', 'pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+              ->leftJoin('provinsi', 'kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+              ->where('kabupaten.id_kabupaten', $id_kabupaten)
+              ->groupBy('pesantren.id_pesantren')
+              //->paginate(15);
+              ->get();
+      $row = 1;
+      $pdf = PDF::loadview('pdf.pesantrenkabupaten', compact('pesantrens','row','kab','kab'))->setPaper('legal', 'landscape');;
+      return $pdf->download('Data Pesantren Berdasarkan Kabupaten.pdf');
     }
 
     public function exportPesantrenByKabupatenEXL($id_kabupaten=1)
