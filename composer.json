@@ -10,7 +10,8 @@
         "laravelcollective/html": "^5.2",
         "nicolaslopezj/searchable": "1.*",
         "maatwebsite/excel": "^2.1",
-        "barryvdh/laravel-dompdf": "^0.6.1"
+        "barryvdh/laravel-dompdf": "^0.6.1",
+        "elasticquent/elasticquent":"dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

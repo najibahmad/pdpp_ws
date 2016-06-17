@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Elasticquent\ElasticquentTrait;
 
 class Kabupaten extends Model
 {
+    use ElasticquentTrait;
+
     protected $table='kabupaten';
 
     public $timestamps = false;
@@ -21,6 +24,6 @@ class Kabupaten extends Model
 
     public function pesantrens()
   	{
-      return $this->hasMany('App\Provinsi','kabupaten_id_kabupaten','id_kabupaten');
+      return $this->hasMany('App\Pesantren','kabupaten_id_kabupaten','id_kabupaten');
     }
 }

@@ -5,8 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
+use Elasticquent\ElasticquentTrait;
+
+
 class Pesantren extends Model
 {
+    use ElasticquentTrait;
     use SearchableTrait;
 
     protected $table='pesantren';
@@ -16,9 +20,16 @@ class Pesantren extends Model
     protected $primaryKey = 'id_pesantren';
 
     protected $fillable = [
-      'NSPP','nama_pesantren','alamat_pesantren','kecamatan_pesantren',
-      'kabupaten_id_kabupaten','nama_pengasuh','jumlah_santri','jumlah_santri_mukim',
-      'no_telepon','website'
+        'NSPP',
+        'nama_pesantren',
+        'alamat_pesantren',
+        'kecamatan_pesantren',
+        'no_telepon',
+        'website',
+        'nama_pengasuh',
+        'jumlah_santri',
+        'jumlah_santri_mukim',
+        'kabupaten_id_kabupaten'
     ];
 
     /**
@@ -39,7 +50,7 @@ class Pesantren extends Model
 
     public function kabupaten()
   	{
-      return $this->belongsTo('App\Kabupaten','kabupaten_id_kabupaten','id_kabupaten');
+        return $this->belongsTo('App\Kabupaten','kabupaten_id_kabupaten','id_kabupaten');
     }
 
     // public function provinsi()
