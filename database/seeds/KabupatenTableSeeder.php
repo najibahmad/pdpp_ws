@@ -12,7 +12,7 @@ class KabupatenTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('kabupaten')->delete();
+        // DB::table('kabupaten')->delete();
 
         $faker = Faker\Factory::create('id_ID');
 

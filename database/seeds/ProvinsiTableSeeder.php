@@ -12,7 +12,7 @@ class ProvinsiTableSeeder extends Seeder
     public function run()
     {
         //remove any existing data in provinsi table
-        DB::table('provinsi')->delete();
+        // DB::table('provinsi')->delete();
 
         $faker = Faker\Factory::create('id_ID');
 

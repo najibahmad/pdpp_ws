@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
+
 class PesantrenTableSeeder extends Seeder
 {
     /**
@@ -13,11 +14,13 @@ class PesantrenTableSeeder extends Seeder
     public function run()
     {
         //remove any existing data in pesantren table
-        DB::table('pesantren')->truncate();
+
+        // DB::table('pesantren')->truncate();
 
         $faker = Faker\Factory::create('id_ID');
 
         for($i=0; $i<30; $i++){
+            $kabupatenRandom = DB::table('kabupaten')->first();
             DB::table('pesantren')->insert([
                 'NSPP' => $faker->randomNumber(5),
                 'nama_pesantren'=> $faker->company,
@@ -29,6 +32,7 @@ class PesantrenTableSeeder extends Seeder
                 'nama_pengasuh' =>  $faker->firstName,
                 'jumlah_santri'  => $faker->randomNumber(4),
                 'jumlah_santri_mukim'  => $faker->randomNumber(4),
+                'kabupaten_id_kabupaten' => $kabupatenRandom->id_kabupaten
             ]);
         }
     }
