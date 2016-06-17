@@ -212,6 +212,11 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        //PDPP Specific Aliases
+        'Pesantren' => App\Pesantren::class,
+        'Kabupaten' => App\Kabupaten::class,
+        'Provinsi' => App\Provinsi::class,
     ],
 
 ];

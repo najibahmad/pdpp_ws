@@ -17,7 +17,8 @@ class KabupatenTableSeeder extends Seeder
         $faker = Faker\Factory::create('id_ID');
 
         foreach(range(1, 30) as $index){
-            $provinsiRandom = DB::table('provinsi')->first();
+            // $provinsiRandom = DB::table('provinsi')->first();
+            $provinsiRandom = Provinsi::all()->random(1);
 
             DB::table('kabupaten')->insert([
                 'nama_kabupaten' => $faker->city,
