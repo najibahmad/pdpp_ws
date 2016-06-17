@@ -25,7 +25,8 @@ class Pesantren extends Model
         'website',
         'nama_pengasuh',
         'jumlah_santri',
-        'jumlah_santri_mukim'
+        'jumlah_santri_mukim',
+        'kabupaten_id_kabupaten'
     ];
 
     /**

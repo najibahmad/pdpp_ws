@@ -75,14 +75,14 @@ class APIPesantrenController extends Controller
     {
       if($this->cek_token($token))
       {
-        $kabupaten = DB::table('pesantren')
+        $pesantrenALL = DB::table('pesantren')
                     ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
                     ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
-                    //->select('id_pesantren','nama_pesantren','nama_kabupaten','nama_provinsi')
-                    ->select('id_pesantren','nama_pesantren')
+                    ->select('id_pesantren','nama_pesantren','nama_pengasuh','alamat_pesantren','nama_kabupaten','nama_provinsi')
+                    //->select('id_pesantren','nama_pesantren')
                     ->get();
 
-        return response()->json(array("data" => $kabupaten));
+        return response()->json(array("data" => $pesantrenALL));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }

@@ -81,6 +81,9 @@
                                 <li>
                                     <a href="{!! URL::to('/admin/pesbykab') !!}">Pesantren Berdasarkan Kabupaten</a>
                                 </li>
+                                <li>
+                                    <a href="{!! URL::to('/admin/pesbykab') !!}">Seluruh Pesantren</a>
+                                </li>                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
