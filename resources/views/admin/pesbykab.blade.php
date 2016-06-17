@@ -38,7 +38,7 @@
                 </form>
               </div>
               <div>
-                <p class="text-center" style="font-size:14px"><b>Daftar Pesantren Pada Provinsi : {{ $kab[0] }}</b></p>
+                <p class="text-center" style="font-size:14px"><b>Daftar Pesantren Pada : {{ $kab[0] }}</b></p>
               </div>
               <div class="row bottom10">
                 <p>
