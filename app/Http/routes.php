@@ -38,6 +38,8 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/public','PublicController@index');
+
 // Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
 Route::group(array('prefix' => 'admin'), function()
 {
@@ -53,6 +55,7 @@ Route::group(array('prefix' => 'admin'), function()
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
     Route::delete('pengguna/delete/{pengguna}','PenggunaController@destroy');
 
+    // report
     Route::get('/pesbyprov','LaporanController@pesantrenByProvinsi');
     Route::post('/pesbyprov','LaporanController@pesantrenByProvinsi2');
     Route::get('/pesbykab','LaporanController@pesantrenByKabupaten');
@@ -63,4 +66,10 @@ Route::group(array('prefix' => 'admin'), function()
 
     Route::get('/exsportpes1pdf/{id_kab}','LaporanController@exportPesantrenByKabupatenPDF');
     Route::get('/exsportpes1xls/{id_kab}','LaporanController@exportPesantrenByKabupatenEXl');
+});
+
+Route::group(array('prefix' => 'public'), function()
+{
+    Route::get('/allpesantren','PublicController@listPesantrenAll');
+    Route::get('/exportpesantren','PublicController@exportPesantren');
 });
