@@ -5,8 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
+use Elasticquent\ElasticquentTrait;
+
+
 class Pesantren extends Model
 {
+    use ElasticquentTrait;
     use SearchableTrait;
 
     protected $table='pesantren';
@@ -21,7 +25,6 @@ class Pesantren extends Model
         'alamat_pesantren',
         'kecamatan_pesantren',
         'no_telepon',
-
         'website',
         'nama_pengasuh',
         'jumlah_santri',

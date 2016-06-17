@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Elasticquent\ElasticquentTrait;
 
 class Kabupaten extends Model
 {
+    use ElasticquentTrait;
+
     protected $table='kabupaten';
 
     public $timestamps = false;
