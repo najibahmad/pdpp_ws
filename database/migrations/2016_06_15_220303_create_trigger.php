@@ -36,8 +36,8 @@ class CreateTrigger extends Migration
      *
     //  * @return void
     //  */
-    // public function down('DROP TRIGGER `pesantren_AFTER_INSERT`')
-    // {
-    //     //
-    // }
+    public function down()
+    {
+        //
+    }
 }
