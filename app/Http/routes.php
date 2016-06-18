@@ -47,7 +47,8 @@ Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
 // Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
 Route::group(array('prefix' => 'admin'), function()
 {
-    Route::get('/','ProvinsiController@home');
+    // Route::get('/','ProvinsiController@home');
+    Route::get('/','DashboardController@adminHome');    
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
     Route::delete('provinsi/delete/{provinsi}','ProvinsiController@destroy');
     Route::resource('kabupaten','KabupatenController',['except' => ['show','destroy']]);
