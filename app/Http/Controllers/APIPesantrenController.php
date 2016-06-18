@@ -1,19 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Pesantren;
 use App\Provinsi;
 use App\Kabupaten;
 use DB;
-
 class APIPesantrenController extends Controller
 {
     protected $token_asli = "10adcba89b4a410c889b66fa3a87b6a0";
-
     public function listProvinsi($token)
     {
       if($this->cek_token($token))
@@ -25,7 +20,6 @@ class APIPesantrenController extends Controller
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function listKabupaten($token)
     {
       if($this->cek_token($token))
@@ -34,12 +28,10 @@ class APIPesantrenController extends Controller
                     ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
                     ->select('id_kabupaten', 'nama_kabupaten','nama_provinsi')
                     ->get();
-
         return response()->json(array("data" => $kabupaten));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function listKabupatenByIdProvinsi($token, $id_provinsi)
     {
       if($this->cek_token($token))
@@ -49,12 +41,10 @@ class APIPesantrenController extends Controller
                     ->where('kabupaten.provinsi_id_provinsi', '=', $id_provinsi)
                     ->select('id_kabupaten','nama_kabupaten','nama_provinsi')
                     ->get();
-
         return response()->json(array("data" => $kabupaten));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function listPesantrenByIdKabupaten($token, $id_kabupaten)
     {
       if($this->cek_token($token))
@@ -63,14 +53,13 @@ class APIPesantrenController extends Controller
                     ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
                     ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
                     ->where('pesantren.kabupaten_id_kabupaten', '=', $id_kabupaten)
+                    ->select('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','alamat_pesantren','nama_kabupaten','nama_provinsi')
                     //->select('id_pesantren','nama_pesantren','nama_kabupaten','nama_provinsi')
                     ->get();
-
         return response()->json(array("data" => $kabupaten));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function listPesantrenAll($token)
     {
       if($this->cek_token($token))
@@ -78,15 +67,13 @@ class APIPesantrenController extends Controller
         $pesantrenALL = DB::table('pesantren')
                     ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
                     ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
-                    ->select('id_pesantren','nama_pesantren','nama_pengasuh','alamat_pesantren','nama_kabupaten','nama_provinsi')
+                    ->select('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','alamat_pesantren','nama_kabupaten','nama_provinsi')
                     //->select('id_pesantren','nama_pesantren')
                     ->get();
-
         return response()->json(array("data" => $pesantrenALL));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function detailPesantren($token, $id_pesantren)
     {
       if($this->cek_token($token))
@@ -97,12 +84,10 @@ class APIPesantrenController extends Controller
                     ->where('pesantren.id_pesantren', '=', $id_pesantren)
                     //->select('id_pesantren','nama_pesantren','nama_kabupaten','nama_provinsi')
                     ->get();
-
         return response()->json(array("data" => $pesantren));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function pesantrenSearchByText($token, $text)
     {
       if($this->cek_token($token))
@@ -111,14 +96,13 @@ class APIPesantrenController extends Controller
         $pesantren = DB::table('pesantren')
                     ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
                     ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
-                    ->select('id_pesantren','nama_pesantren','nama_kabupaten','nama_provinsi')
+                    ->select('id_pesantren','nama_pesantren','nama_pengasuh','alamat_pesantren','nama_kabupaten','nama_provinsi')
+					->where('nama_pesantren', 'like', '%'.$text.'%')
                     ->get();
-
         return response()->json(array("data" => $pesantren));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function pesantrenSearchByTextAndProvinsi($token, $text,$id_provinsi)
     {
       // Search only active users
@@ -132,29 +116,38 @@ class APIPesantrenController extends Controller
       //$id_provinsi = Kabupaten::where('id_kabupaten',$id_provinsi)->pluck('provinsi_id_provinsi');
       if($this->cek_token($token))
       {
-        $pesantren = Pesantren::where('id_provinsi', $id_provinsi)
-                    ->search($text)
+        // $pesantren = Pesantren::where('id_provinsi', $id_provinsi)
+                    // ->search($text)
+                    // ->get();
+		$pesantren = DB::table('pesantren')
+                    ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+                    ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+                    ->select('id_pesantren','nama_pesantren','nama_pengasuh','alamat_pesantren','nama_kabupaten','nama_provinsi')
+					->where('kabupaten.provinsi_id_provinsi', '=', $id_provinsi)
+					->where('nama_pesantren', 'like', '%'.$text.'%')
                     ->get();
-
         return response()->json(array("data" => $pesantren));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
     public function pesantrenSearchByTextAndKabupaten($token, $text,$id_kabupaten)
     {
       if($this->cek_token($token))
       {
-        $pesantren = Pesantren::where('kabupaten_id_kabupaten', $id_kabupaten)
-                    ->search($text)
+        // $pesantren = Pesantren::where('kabupaten_id_kabupaten', $id_kabupaten)
+                    // ->search($text)
+                    // ->get();
+		$pesantren = DB::table('pesantren')
+                    ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+                    ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+                    ->select('id_pesantren','nama_pesantren','nama_pengasuh','alamat_pesantren','nama_kabupaten','nama_provinsi')
+					->where('kabupaten.id_kabupaten', '=', $id_kabupaten)
+					->where('nama_pesantren', 'like', '%'.$text.'%')
                     ->get();
-
         return response()->json(array("data" => $pesantren));
       }
       return response()->json(array("data" => "Anda tidak memiliki akses."));
     }
-
-
     private function cek_token($token)
     {
       return ($this->token_asli == $token);

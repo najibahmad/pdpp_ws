@@ -31,14 +31,15 @@ Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
 });
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/','PublicController@index');
 Route::get('/public','PublicController@index');
+Route::get('/home', 'HomeController@index');
 
 Route::get('/PesantrenSearch', 'PesantrenSearchController@index');
 Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
