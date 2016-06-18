@@ -40,6 +40,9 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::get('/public','PublicController@index');
 
+Route::get('/PesantrenSearch', 'PesantrenSearchController@index');
+Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
+
 // Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
 Route::group(array('prefix' => 'admin'), function()
 {
