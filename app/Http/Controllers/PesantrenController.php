@@ -18,7 +18,8 @@ class PesantrenController extends Controller
      */
     public function index()
     {
-      $pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
+      // $pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
+      $pesantren = Pesantren::limit(15)->offset(0)->get();
       //$prov = Provinsi::all();
       return view('pesantren.pesantren', compact('pesantren'));
     }
