@@ -46,8 +46,11 @@ class PesantrenController extends Controller
       $provinsi = Provinsi::lists('nama_provinsi','id_provinsi');
 
       //$pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
+
+      // $pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
+      $pesantren = Pesantren::limit(15)->offset(0)->get();
+
       //$prov = Provinsi::all();
-      $pesantren = "";
       return view('pesantren.pesantren', compact('pesantren','provinsi'));
     }
 
