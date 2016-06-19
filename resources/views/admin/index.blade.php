@@ -31,7 +31,7 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Pie Chart
+                Grafik Perbandingan Santri
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -94,9 +94,10 @@
       }]
 
   };
+
   window.onload = function() {
-      var ctx = document.getElementById("canvas").getContext("2d");
-      window.myBar = new Chart(ctx, {
+      var ctx2 = document.getElementById("canvas").getContext("2d");
+      window.myBar = new Chart(ctx2, {
           type: 'bar',
           data: barChartData,
           options: {
@@ -119,58 +120,52 @@
               }
           }
       });
+
+      var ctx = document.getElementById("pie").getContext("2d");
+      window.myPie = new Chart(ctx, config);
   };
 </script>
+
+
+
+
+
 
 <!-- pie chart :: created by agung -->
 <script type="text/javascript">
 
-var pie_chart_data = {
-    labels: [
-        "Santri Mukim",
-        "Santri Total"
-    ],
-    datasets: [
-        {
-            data: [300, 50],
-            backgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56"
+var config = {
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: [
+                {!! json_encode($pie_chart[0]->jumlah_santri) !!},
+                {!! json_encode($pie_chart[0]->jumlah_santri_mukim) !!},
             ],
-            hoverBackgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56"
-            ]
-        }]
+            backgroundColor: [
+                "#F7464A",
+                "#46BFBD",
+            ],
+        }],
+        labels: [
+            "Santri Mukim",
+            "Santri Non-Mukin",
+        ]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Perbandingan Santri Mukim dari Total Santri'
+        }
+    }
 };
 
 // For a pie chart
-window.onload = function() {
-  var ctx = document.getElementById("pie").getContext("2d");
-  window.myPieChart = new Chart(ctx,{
-    type: 'pie',
-    data: barChartData,
-    options: {
-        // Elements options apply to all of the options unless overridden in a dataset
-        // In this case, we are setting the border of each bar to be 2px wide and green
-        elements: {
-            rectangle: {
-                borderWidth: 0.5,
-                borderColor: 'rgb(0, 0, 0)',
-                borderSkipped: 'bottom'
-            }
-        },
-        responsive: true,
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Pesantren Berdasarkan Provinsi'
-        }
-    }
-})
+// window.onload = function() {
+//     var ctx = document.getElementById("pie").getContext("2d");
+//     window.myPie = new Chart(ctx, config);
+// };
+
 </script>
 @endsection

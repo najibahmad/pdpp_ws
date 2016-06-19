@@ -28,7 +28,7 @@ class DashboardController extends Controller
       $pie_chart = DB::table('pesantren')
       					->select(DB::raw('SUM(jumlah_santri) as jumlah_santri, SUM(jumlah_santri_mukim) as jumlah_santri_mukim'))
       					->get();
-      // dd($pe);
+      // dd($pie_chart);
 
       return view('admin.index', compact('nama_provinsi', 'jmlpesantrens', 'pie_chart'));
     }

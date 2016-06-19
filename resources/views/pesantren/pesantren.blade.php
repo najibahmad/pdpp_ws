@@ -47,12 +47,6 @@
                             <label for="kabupaten_id_kabupaten" class="col-md-4 control-label">Pilih Kabupaten</label>
                             <div class="col-md-4">
                                 {!! Form::select('kabupaten_id_kabupaten', ['0' => 'Semua Kabupaten'], 0,['class' => 'kabupaten form-control']) !!}
-
-                                @if ($errors->has('kabupaten_id_kabupaten'))
-                                    <span class="help-block">
-                                        {{ $errors->first('kabupaten_id_kabupaten') }}
-                                    </span>
-                                @endif
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('cari') ? ' has-error' : '' }}">
@@ -70,12 +64,12 @@
                         </div>
                         <div class="col-md-6 col-md-offset-5 bottom10">
                             <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-building"></i> Tampilkan
+                                <i class="fa fa-btn fa-building"></i> Cari Pesantren
                             </button>
                         </div>
                 </form>
               </div>
-              @if(!$pesantren == "")
+              <!-- @if(!$pesantren == ""){ -->
 							<div class="dataTable_wrapper">
 									<table class="table table-striped table-bordered table-hover" id="tabel-provinsi">
 										<thead>
@@ -107,7 +101,9 @@
 													{{ $pes->nama_pesantren }}
 											  </td>
                         <td class="center col-md-1">
-													{{ $pes->kabupaten->provinsi->nama_provinsi }}
+                          {{ $pes->alamat_pesantren }}
+												
+                          <!-- {{ $pes->nama_provinsi }} -->
 											  </td>
                         <td class="center col-md-1">
 													{{ $pes->nama_pengasuh }}
@@ -136,7 +132,7 @@
 										</tbody>
 							   </table>
 					    </div>
-            @endif
+            <!-- @endif -->
 				</div>
  				<!-- /.panel-body -->
  			</div>
