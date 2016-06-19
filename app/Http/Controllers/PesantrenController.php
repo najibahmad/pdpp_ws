@@ -8,6 +8,7 @@ use App\Pesantren;
 use App\Kabupaten;
 use App\Pengasuh;
 use App\Http\Requests\PesantrenRequest;
+use App\Provinsi;
 
 class PesantrenController extends Controller
 {
@@ -18,9 +19,52 @@ class PesantrenController extends Controller
      */
     public function index()
     {
-      $pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
+      // $id_provinsi = $request->provinsi_id_provinsi;
+      // $id_kabupaten = $request->kabupaten_id_kabupaten;
+      // $text = $request->cari;
+      //
+      // dd($id_provinsi,$id_kabupaten,$text);
+
+      $provinsi = Provinsi::lists('nama_provinsi','id_provinsi');
+
+      //$pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
       //$prov = Provinsi::all();
-      return view('pesantren.pesantren', compact('pesantren'));
+      $pesantren = "";
+      return view('pesantren.pesantren', compact('pesantren','provinsi'));
+    }
+
+    public function index2(Request $request)
+    {
+      $id_provinsi = $request->provinsi_id_provinsi;
+      $id_kabupaten = $request->kabupaten_id_kabupaten;
+      $text = $request->cari;
+
+      dd($id_provinsi,$id_kabupaten,$text);
+
+      // dd($request);
+
+      $provinsi = Provinsi::lists('nama_provinsi','id_provinsi');
+
+      //$pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
+
+      // $pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
+      $pesantren = Pesantren::limit(15)->offset(0)->get();
+
+      //$prov = Provinsi::all();
+      return view('pesantren.pesantren', compact('pesantren','provinsi'));
+    }
+
+
+    public function getKabupaten($id)
+    {
+      $kabupatens = Kabupaten::where('provinsi_id_provinsi', '=', $id)->get();
+      //dd($kabupatens);
+      $options = array();
+
+      foreach ($kabupatens as $kabupaten) {
+          $options += array($kabupaten->id_kabupaten => $kabupaten->nama_kabupaten);
+      }
+      return $options;
     }
 
     /**

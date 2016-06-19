@@ -26,6 +26,8 @@ Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
     Route::post('{TOKEN}/search/{TEXT}/provinsi/{ID_PROV}','APIPesantrenController@pesantrenSearchByTextAndProvinsi');
     Route::post('{TOKEN}/search/{TEXT}/kabupaten/{ID_KAB}','APIPesantrenController@pesantrenSearchByTextAndKabupaten');
 
+    // route for kabupaten request dropdown
+    // Route::get('{TOKEN}/list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
     //Route::get('users', 'UserController');
     //Route::resource('categories', 'CategoryController');
 });
@@ -47,15 +49,17 @@ Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
 // Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
 Route::group(array('prefix' => 'admin'), function()
 {
-    Route::get('/','ProvinsiController@home');
+    // Route::get('/','ProvinsiController@home');
+    Route::get('/','DashboardController@adminHome');    
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
     Route::delete('provinsi/delete/{provinsi}','ProvinsiController@destroy');
     Route::resource('kabupaten','KabupatenController',['except' => ['show','destroy']]);
     Route::delete('kabupaten/delete/{kabupaten}','KabupatenController@destroy');
-    Route::resource('pengasuh','PengasuhController',['except' => ['show','destroy']]);
-    Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
+    // Route::resource('pengasuh','PengasuhController',['except' => ['show','destroy']]);
+    // Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
     Route::resource('pesantren','PesantrenController',['except' => ['show','destroy']]);
     Route::delete('pesantren/delete/{pesantren}','PesantrenController@destroy');
+    Route::post('pesantren/cari','PesantrenController@index2');
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
     Route::delete('pengguna/delete/{pengguna}','PenggunaController@destroy');
 
@@ -70,6 +74,8 @@ Route::group(array('prefix' => 'admin'), function()
 
     Route::get('/exsportpes1pdf/{id_kab}','LaporanController@exportPesantrenByKabupatenPDF');
     Route::get('/exsportpes1xls/{id_kab}','LaporanController@exportPesantrenByKabupatenEXl');
+
+    Route::get('/pesantren/kabupatens/{id}', 'PesantrenController@getKabupaten');
 });
 
 Route::group(array('prefix' => 'public'), function()

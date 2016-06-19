@@ -31,11 +31,11 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Bar Chart Example
+                Pie Chart
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-bar-chart"></div>
+                <canvas id="pie"></canvas>
             </div>
             <!-- /.panel-body -->
         </div>
@@ -122,4 +122,55 @@
   };
 </script>
 
+<!-- pie chart :: created by agung -->
+<script type="text/javascript">
+
+var pie_chart_data = {
+    labels: [
+        "Santri Mukim",
+        "Santri Total"
+    ],
+    datasets: [
+        {
+            data: [300, 50],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }]
+};
+
+// For a pie chart
+window.onload = function() {
+  var ctx = document.getElementById("pie").getContext("2d");
+  window.myPieChart = new Chart(ctx,{
+    type: 'pie',
+    data: barChartData,
+    options: {
+        // Elements options apply to all of the options unless overridden in a dataset
+        // In this case, we are setting the border of each bar to be 2px wide and green
+        elements: {
+            rectangle: {
+                borderWidth: 0.5,
+                borderColor: 'rgb(0, 0, 0)',
+                borderSkipped: 'bottom'
+            }
+        },
+        responsive: true,
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Pesantren Berdasarkan Provinsi'
+        }
+    }
+})
+</script>
 @endsection
