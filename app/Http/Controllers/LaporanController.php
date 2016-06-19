@@ -30,6 +30,7 @@ class LaporanController extends Controller
 
         $provinsi = Provinsi::lists('nama_provinsi','id_provinsi');
 
+        //select beberapa table
         $pesantren = DB::table('pesantren')
     			      ->select(['pesantren.nama_pesantren', 'pesantren.nama_pengasuh', 'pesantren.jumlah_santri','kabupaten.nama_kabupaten'])
                 ->leftJoin('kabupaten', 'pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
@@ -123,14 +124,6 @@ class LaporanController extends Controller
 
         return view('admin.pesbykab',compact('kabupaten','kab','pesantren','counter','id_kabupaten'));
     }
-
-
-
-
-
-
-
-
 
 
     public function exportPesantrenByProvinsiPDF($id_provinsi)

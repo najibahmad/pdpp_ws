@@ -26,8 +26,7 @@ class ProvinsiController extends Controller
       //     foreach ($pesantren->kabupaten->provinsi->id_provinsi){
       //         array_push($jmlpesantrens, $pesantren->kabupaten->count());
       //     }
-      // }
-
+      
       $nama_provinsi = [];
       $jmlpesantrens = [];
       foreach (Provinsi::all() as $kabupaten) {

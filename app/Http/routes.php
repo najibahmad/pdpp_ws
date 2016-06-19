@@ -71,5 +71,9 @@ Route::group(array('prefix' => 'admin'), function()
 Route::group(array('prefix' => 'public'), function()
 {
     Route::get('/allpesantren','PublicController@listPesantrenAll');
-    Route::get('/exportpesantren','PublicController@exportPesantren');
+    Route::post('/allpesantren','PublicController@listPesantrenAll2');
+
+    Route::get('/exportpesantrenbyPDF','PublicController@exportPesantrenPDF');
+    Route::get('/exportpesantrenbyExcel','PublicController@exportPesantrenExcel');
+     
 });
