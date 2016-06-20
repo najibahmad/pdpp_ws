@@ -106,7 +106,7 @@ class LaporanController extends Controller
         $id_kabupaten = $request->kabupaten_id_kabupaten;
 
         $kab = DB::table('kabupaten')
-              ->where('id_kabupaten', 1)
+              ->where('id_kabupaten', $id_kabupaten)
               ->pluck('nama_kabupaten');
 
         $kabupaten = Kabupaten::lists('nama_kabupaten','id_kabupaten');

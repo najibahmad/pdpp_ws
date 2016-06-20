@@ -31,11 +31,11 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Bar Chart Example
+                Grafik Perbandingan Santri
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-bar-chart"></div>
+                <canvas id="pie"></canvas>
             </div>
             <!-- /.panel-body -->
         </div>
@@ -94,9 +94,10 @@
       }]
 
   };
+
   window.onload = function() {
-      var ctx = document.getElementById("canvas").getContext("2d");
-      window.myBar = new Chart(ctx, {
+      var ctx2 = document.getElementById("canvas").getContext("2d");
+      window.myBar = new Chart(ctx2, {
           type: 'bar',
           data: barChartData,
           options: {
@@ -119,7 +120,52 @@
               }
           }
       });
+
+      var ctx = document.getElementById("pie").getContext("2d");
+      window.myPie = new Chart(ctx, config);
   };
 </script>
 
+
+
+
+
+
+<!-- pie chart :: created by agung -->
+<script type="text/javascript">
+
+var config = {
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: [
+                {!! json_encode($pie_chart[0]->jumlah_santri) !!},
+                {!! json_encode($pie_chart[0]->jumlah_santri_mukim) !!},
+            ],
+            backgroundColor: [
+                "#F7464A",
+                "#46BFBD",
+            ],
+        }],
+        labels: [
+            "Santri Mukim",
+            "Santri Non-Mukin",
+        ]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Perbandingan Santri Mukim dari Total Santri'
+        }
+    }
+};
+
+// For a pie chart
+// window.onload = function() {
+//     var ctx = document.getElementById("pie").getContext("2d");
+//     window.myPie = new Chart(ctx, config);
+// };
+
+</script>
 @endsection
