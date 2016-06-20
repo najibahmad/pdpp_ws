@@ -22,6 +22,10 @@ class PublicController extends Controller
         return view('public.index');
     }
 
+    public function getpesantren()
+    {
+        
+    }
 
     // list pesantren/ search result
     public function listPesantrenAll()

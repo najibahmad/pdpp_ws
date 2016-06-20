@@ -14,7 +14,7 @@
 
 <div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-				<h2 class="page-header top15">Daftar Seluruh Pesantren</h2>
+				<h2 class="page-header top15">Daftar Pondok Pesantren Se-Indonesia</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 </div>
