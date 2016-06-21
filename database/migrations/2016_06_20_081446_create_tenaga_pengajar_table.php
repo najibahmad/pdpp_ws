@@ -33,5 +33,7 @@ class CreateTenagaPengajarTable extends Migration
     public function down()
     {
         //
+        Schema::drop('tenaga_pengajar');
+
     }
 }
