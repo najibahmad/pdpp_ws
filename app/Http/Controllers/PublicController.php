@@ -15,7 +15,6 @@ use App\Http\Requests\PesantrenRequest;
 use Barryvdh\DomPDF\Facade as PDF;
 use Auth;
 
-use App\Pesantren;
 
 class PublicController extends Controller
 {
