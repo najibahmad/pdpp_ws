@@ -19,12 +19,12 @@ class PesantrenTableSeeder extends Seeder
 
         $faker = Faker\Factory::create('id_ID');
 
-        for($i=0; $i<30; $i++){
+        for($i=0; $i<300000; $i++){
             // $kabupatenRandom = DB::table('kabupaten')->first();
             $kabupatenRandom = Kabupaten::all()->random(1);
             
             DB::table('pesantren')->insert([
-                'NSPP' => $faker->randomNumber(5),
+                'NSPP' => $faker->unique()->randomNumber(9),
                 'nama_pesantren'=> $faker->company,
                 'alamat_pesantren' => $faker->address,
                 'kecamatan_pesantren'  => $faker->address,

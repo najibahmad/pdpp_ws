@@ -6,12 +6,22 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
 
+use App\Pesantren;
+
 class PublicController extends Controller
 {
     // search 
-    public function index()
+    public function index(Request $request)
     {
-        return view('public.index');
+
+        if($request->has('search')){
+            $pesantrens = Pesantren::search($request->input('search'))->toArray();
+        }else{
+            return view('public.index');
+        }
+
+        return view('public.index', compact('pesantrens'));
+
     }
 
     // list pesantren/ search result
