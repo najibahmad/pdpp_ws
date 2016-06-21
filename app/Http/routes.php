@@ -82,7 +82,7 @@ Route::group(array('prefix' => 'admin'), function()
 
 Route::group(array('prefix' => 'public'), function()
 {
-    Route::get('/allpesantren','PublicController@listPesantrenAll');
+    Route::get('/pesantrens','PublicController@pesantrens');
     Route::post('/allpesantren','PublicController@listPesantrenAll2');
 
     Route::get('/exportpesantrenbyPDF','PublicController@exportPesantrenPDF');
