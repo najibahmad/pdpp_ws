@@ -14,7 +14,7 @@
 
 <div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-				<h2 class="page-header top15">Daftar Seluruh Pesantren</h2>
+				<h2 class="page-header top15">Daftar Pondok Pesantren Se-Indonesia</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 </div>
@@ -24,17 +24,22 @@
             <div class="panel-body">
               <div class="row bottom10">
                 
-                <div class="col-md-6 col-md-offset-5">
+              <!--   <div class="col-md-6 col-md-offset-5">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-btn fa-building"></i> Export Excel
                             </button>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-btn fa-building"></i> Export PDF
                             </button>
-                        </div>
-                <br>
-                 <p class="navbar-text" align="center" style="font-size:14px"><b>Daftar Pesantren : {!! 554 !!}</b></p>
+                        </div> -->
+               
+                 <!-- <p class="navbar-text" align="center" style="font-size:14px"><b>Daftar Pesantren : {!! 554 !!}</b></p>
+                  <p> -->
                  <br>
+                  <a class="btn btn-primary left7" href="{{ url('/public/exportpesantrenbyPDF') }}"><i class="fa fa-file-pdf-o"></i>  Export PDF</a>
+                  <a class="btn btn-primary left7" href="{{ url('/public/exportpesantrenbyExcel') }}"><i class="fa fa-file-excel-o"></i>  Export Excel </a>
+                </p>
+                <br>
 
 							</div>
 								<div class="dataTable_wrapper">
@@ -48,7 +53,7 @@
                           <th>Detil</th>
 												</tr>
 											</thead>
-											<tbody>
+                      <tbody>
 												@foreach ($pesantren as $pes)
 												<tr>
 													<td class="col-xs-1">

@@ -33,30 +33,32 @@ Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
 });
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::auth();
 
+Route::get('/home', 'HomeController@index');
 Route::get('/','PublicController@index');
 Route::get('/public','PublicController@index');
-Route::get('/home', 'HomeController@index');
+
 
 Route::get('/PesantrenSearch', 'PesantrenSearchController@index');
 Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
 
 // Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+
 Route::group(array('prefix' => 'admin'), function()
 {
-    // Route::get('/','ProvinsiController@home');
+    Route::get('/','ProvinsiController@home');
     Route::get('/','DashboardController@adminHome');    
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
     Route::delete('provinsi/delete/{provinsi}','ProvinsiController@destroy');
     Route::resource('kabupaten','KabupatenController',['except' => ['show','destroy']]);
     Route::delete('kabupaten/delete/{kabupaten}','KabupatenController@destroy');
-    // Route::resource('pengasuh','PengasuhController',['except' => ['show','destroy']]);
-    // Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
+    Route::resource('pengasuh','PengasuhController',['except' => ['show','destroy']]);
+    Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
     Route::resource('pesantren','PesantrenController',['except' => ['show','destroy']]);
     Route::delete('pesantren/delete/{pesantren}','PesantrenController@destroy');
     Route::post('pesantren/cari','PesantrenController@index2');
@@ -81,5 +83,13 @@ Route::group(array('prefix' => 'admin'), function()
 Route::group(array('prefix' => 'public'), function()
 {
     Route::get('/allpesantren','PublicController@listPesantrenAll');
-    Route::get('/exportpesantren','PublicController@exportPesantren');
+    Route::post('/allpesantren','PublicController@listPesantrenAll2');
+
+    Route::get('/exportpesantrenbyPDF','PublicController@exportPesantrenPDF');
+    Route::get('/exportpesantrenbyExcel','PublicController@exportPesantrenExcel');
 });
+
+    // Route::get('/exportpesantren','PublicController@exportPesantren');
+       
+
+

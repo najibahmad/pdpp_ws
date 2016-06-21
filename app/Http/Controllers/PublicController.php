@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use App\Pesantren;
+use App\Provinsi;
+use App\Kabupaten;
 use DB;
+use Input;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
+use Auth;
 
 use App\Pesantren;
 
@@ -24,23 +32,50 @@ class PublicController extends Controller
 
     }
 
+    public function getpesantren()
+    {
+        
+    }
+
     // list pesantren/ search result
     public function listPesantrenAll()
     {
 
-        $pesantren = DB::table('pesantren')->select('NSPP','nama_pesantren','nama_pengasuh')->get();
+         // dd($pesantren);
+       
+        $pesantren = DB::table('pesantren')->get();
+        $counter = 0;
 
-        // dd($pesantren);
-        $counter=1;
         return view('public.pesantrens',compact('pesantren','counter'));
     }   
 
-    public function exportPesantren()
+
+    public function listPesantrenAll2()
     {
 
+    }
+
+
+    public function exportPesantrenPDF()
+    {
+        $pesantrens = DB::table('pesantren')
+        ->get();
+
+        $row = 1;
+        $pdf = PDF::loadview('pdf.reportpesantren',compact('pesantrens','row'))->setPaper('legal','landscape');
+        
+        return $pdf->download('Data Report Pondok Pesantren.pdf');
+
+
+
+    }
+
+
+    public function exportPesantrenExcel()
+    {
+     
         $pesantren = DB::table('pesantren')
-                    ->Join('kabupaten', 'pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
-                    ->where('kabupaten.id_kabupaten', $id_kabupaten)
+       
                     ->get();
         // dd($pesantren);
 

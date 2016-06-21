@@ -9,6 +9,7 @@ use App\Kabupaten;
 use App\Pengasuh;
 use App\Http\Requests\PesantrenRequest;
 use App\Provinsi;
+use DB;
 
 class PesantrenController extends Controller
 {
@@ -38,18 +39,38 @@ class PesantrenController extends Controller
       $id_provinsi = $request->provinsi_id_provinsi;
       $id_kabupaten = $request->kabupaten_id_kabupaten;
       $text = $request->cari;
+      // dd($id_provinsi,$id_kabupaten,$text);
 
-      dd($id_provinsi,$id_kabupaten,$text);
-
-      // dd($request);
+      $pesantren = "";
 
       $provinsi = Provinsi::lists('nama_provinsi','id_provinsi');
 
       //$pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
 
       // $pesantren = Pesantren::all('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','kabupaten_id_kabupaten');
-      $pesantren = Pesantren::limit(15)->offset(0)->get();
+      // $pesantren = Pesantren::limit(15)->offset(0)->get();
 
+      if ($id_kabupaten==0)
+      {
+        $pesantren = DB::table('pesantren')
+                  ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+                  ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+                  //->select('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','alamat_pesantren','nama_kabupaten','nama_provinsi')
+        					->where('kabupaten.provinsi_id_provinsi', '=', $id_provinsi)
+        					//->where('nama_pesantren', 'like', '%'.$text.'%')
+                  ->get();
+      }else{
+        $pesantren = DB::table('pesantren')
+                  ->join('kabupaten','pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+                  ->join('provinsi','kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+                  //->select('id_pesantren','NSPP','nama_pesantren','nama_pengasuh','jumlah_santri','alamat_pesantren','nama_kabupaten','nama_provinsi')
+                  ->where('kabupaten.provinsi_id_provinsi', '=', $id_provinsi)
+                  ->where('pesantren.kabupaten_id_kabupaten', '=', $id_kabupaten)
+                  ->where('nama_pesantren', 'like', '%'.$text.'%')
+                  ->get();
+      }
+
+      // dd($pesantren);
       //$prov = Provinsi::all();
       return view('pesantren.pesantren', compact('pesantren','provinsi'));
     }
@@ -59,7 +80,7 @@ class PesantrenController extends Controller
     {
       $kabupatens = Kabupaten::where('provinsi_id_provinsi', '=', $id)->get();
       //dd($kabupatens);
-      $options = array();
+      $options = array(0 => 'Semua Kabupaten');
 
       foreach ($kabupatens as $kabupaten) {
           $options += array($kabupaten->id_kabupaten => $kabupaten->nama_kabupaten);

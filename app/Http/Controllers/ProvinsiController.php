@@ -27,6 +27,9 @@ class ProvinsiController extends Controller
       //     foreach ($pesantren->kabupaten->provinsi->id_provinsi){
       //         array_push($jmlpesantrens, $pesantren->kabupaten->count());
       //     }
+
+      
+
       // }
 
       // $nama_provinsi = [];
@@ -62,8 +65,13 @@ class ProvinsiController extends Controller
       //         ->where('provinsi.id_provinsi',1)
       //         ->groupBy('pesantren.id_pesantren')
       //         ->get();
+
       $nama_provinsi = [];
       $jmlpesantrens = [];
+      // foreach (Provinsi::all() as $kabupaten) {
+      //     array_push($nama_provinsi, $kabupaten->nama_provinsi);
+      //     array_push($jmlpesantrens, $kabupaten->kabupatens->count());
+          
       foreach ($pesantrens as $pesantren) {
            array_push($nama_provinsi, $pesantren->nama_provinsi); //$pesantren->nama_kabupaten
            array_push($jmlpesantrens, $pesantren->jumlah);
