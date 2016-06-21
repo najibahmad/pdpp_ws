@@ -18,6 +18,7 @@ Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
     Route::post('{TOKEN}/list/kabupaten/','APIPesantrenController@listKabupaten');
     Route::post('{TOKEN}/list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
     Route::post('{TOKEN}/list/pesantren/{ID_KAB}','APIPesantrenController@listPesantrenByIdKabupaten');
+    Route::post('{TOKEN}/list/pesantren','APIPesantrenController@listPesantrenAll');
     Route::post('{TOKEN}/profil/{ID_PES}','APIPesantrenController@detailPesantren');
 
     // route for search
@@ -25,6 +26,8 @@ Route::group(array('prefix' => 'api/v1','middleware' => 'api'), function()
     Route::post('{TOKEN}/search/{TEXT}/provinsi/{ID_PROV}','APIPesantrenController@pesantrenSearchByTextAndProvinsi');
     Route::post('{TOKEN}/search/{TEXT}/kabupaten/{ID_KAB}','APIPesantrenController@pesantrenSearchByTextAndKabupaten');
 
+    // route for kabupaten request dropdown
+    // Route::get('{TOKEN}/list/kabupaten/{ID_PROV}','APIPesantrenController@listKabupatenByIdProvinsi');
     //Route::get('users', 'UserController');
     //Route::resource('categories', 'CategoryController');
 });
@@ -37,10 +40,19 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-//Route::group(array('prefix' => 'admin'), function()
-Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+Route::get('/','PublicController@index');
+Route::get('/public','PublicController@index');
+
+
+Route::get('/PesantrenSearch', 'PesantrenSearchController@index');
+Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
+
+// Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
+
+Route::group(array('prefix' => 'admin'), function()
 {
     Route::get('/','ProvinsiController@home');
+    Route::get('/','DashboardController@adminHome');    
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
     Route::delete('provinsi/delete/{provinsi}','ProvinsiController@destroy');
     Route::resource('kabupaten','KabupatenController',['except' => ['show','destroy']]);
@@ -49,6 +61,35 @@ Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), functi
     Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
     Route::resource('pesantren','PesantrenController',['except' => ['show','destroy']]);
     Route::delete('pesantren/delete/{pesantren}','PesantrenController@destroy');
+    Route::post('pesantren/cari','PesantrenController@index2');
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
     Route::delete('pengguna/delete/{pengguna}','PenggunaController@destroy');
+
+    // report
+    Route::get('/pesbyprov','LaporanController@pesantrenByProvinsi');
+    Route::post('/pesbyprov','LaporanController@pesantrenByProvinsi2');
+    Route::get('/pesbykab','LaporanController@pesantrenByKabupaten');
+    Route::post('/pesbykab','LaporanController@pesantrenByKabupaten2');
+
+    Route::get('/exsportpes0pdf/{id_prov}','LaporanController@exportPesantrenByProvinsiPDF');
+    Route::get('/exsportpes0xls/{id_prov}','LaporanController@exportPesantrenByProvinsiEXL');
+
+    Route::get('/exsportpes1pdf/{id_kab}','LaporanController@exportPesantrenByKabupatenPDF');
+    Route::get('/exsportpes1xls/{id_kab}','LaporanController@exportPesantrenByKabupatenEXl');
+
+    Route::get('/pesantren/kabupatens/{id}', 'PesantrenController@getKabupaten');
 });
+
+Route::group(array('prefix' => 'public'), function()
+{
+    Route::get('/allpesantren','PublicController@listPesantrenAll');
+    Route::post('/allpesantren','PublicController@listPesantrenAll2');
+
+    Route::get('/exportpesantrenbyPDF','PublicController@exportPesantrenPDF');
+    Route::get('/exportpesantrenbyExcel','PublicController@exportPesantrenExcel');
+});
+
+    // Route::get('/exportpesantren','PublicController@exportPesantren');
+       
+
+

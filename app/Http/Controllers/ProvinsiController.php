@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Provinsi;
 use App\Pesantren;
 use App\Http\Requests\ProvinsiRequest;
+use DB;
 
 class ProvinsiController extends Controller
 {
@@ -26,17 +27,59 @@ class ProvinsiController extends Controller
       //     foreach ($pesantren->kabupaten->provinsi->id_provinsi){
       //         array_push($jmlpesantrens, $pesantren->kabupaten->count());
       //     }
+
+      
+
       // }
+
+      // $nama_provinsi = [];
+      // $jmlpesantrens = [];
+      // foreach (Provinsi::all() as $kabupaten) {
+      //     array_push($nama_provinsi, $kabupaten->nama_provinsi);
+      //     array_push($jmlpesantrens, $kabupaten->kabupatens->count());
+      // }
+
+
+      // SELECT name,COUNT(*) as count FROM tablename GROUP BY name ORDER BY count DESC;
+      // Select P.ProductName, Count(*)
+      // From tblItems As I
+      //     Join tblProducts As P
+      //         On P.ProductId = I.ProductId
+      // Group By P.ProductName
+
+      // berhasil -- jumlah pesantren berdasarkan kabupaten
+      // $pesantrens = DB::select('SELECT k.nama_kabupaten, COUNT(*) AS jumlah
+      //               FROM pesantren AS p JOIN kabupaten AS k ON p.kabupaten_id_kabupaten = k.id_kabupaten
+      //               GROUP BY k.nama_kabupaten');
+
+
+      $pesantrens = DB::select('SELECT v.nama_provinsi, COUNT(*) AS jumlah FROM pesantren AS p
+                    JOIN kabupaten AS k ON p.kabupaten_id_kabupaten = k.id_kabupaten
+                    JOIN provinsi AS v ON k.provinsi_id_provinsi = v.id_provinsi
+                    GROUP BY v.id_provinsi');
+
+      // $pesantrens = DB::table('pesantren')
+      //         ->select('nama_pesantren','')
+      //         ->leftJoin('kabupaten', 'pesantren.kabupaten_id_kabupaten', '=', 'kabupaten.id_kabupaten')
+      //         ->Join('provinsi', 'kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+      //         ->where('provinsi.id_provinsi',1)
+      //         ->groupBy('pesantren.id_pesantren')
+      //         ->get();
 
       $nama_provinsi = [];
       $jmlpesantrens = [];
-      foreach (Provinsi::all() as $kabupaten) {
-          array_push($nama_provinsi, $kabupaten->nama_provinsi);
-          array_push($jmlpesantrens, $kabupaten->kabupatens->count());
+      // foreach (Provinsi::all() as $kabupaten) {
+      //     array_push($nama_provinsi, $kabupaten->nama_provinsi);
+      //     array_push($jmlpesantrens, $kabupaten->kabupatens->count());
+          
+      foreach ($pesantrens as $pesantren) {
+           array_push($nama_provinsi, $pesantren->nama_provinsi); //$pesantren->nama_kabupaten
+           array_push($jmlpesantrens, $pesantren->jumlah);
       }
+
       //dd($nama_provinsi,$jmlpesantrens);
 
-      return view('provinsi.index', compact('nama_provinsi', 'jmlpesantrens'));
+      return view('admin.index', compact('nama_provinsi', 'jmlpesantrens'));
     }
 
     /**

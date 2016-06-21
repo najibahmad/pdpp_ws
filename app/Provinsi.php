@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Elasticquent\ElasticquentTrait;
 
 class Provinsi extends Model
 {
+    use ElasticquentTrait;
+
     protected $table='provinsi';
 
     protected $fillable = ['nama_provinsi'];

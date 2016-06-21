@@ -6,6 +6,8 @@
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet">
+
 @endsection
 
 @section('content')
@@ -42,14 +44,14 @@
 											<tbody>
 												@foreach ($kab as $kabupaten)
 												<tr>
-													<td class="center col-xs-1">
-														{{ $kabupaten->id_kabupaten }}
-												  </td>
 													<td class="center col-md-1">
-														{{ $kabupaten->nama_kabupaten }}
+														{{ $kabupaten->id_kabupaten, ['size' => 1] }}
 												  </td>
-                          <td class="center col-md-1">
-														{{ $kabupaten->provinsi->nama_provinsi }}
+													<td class="center col-md-2">
+														{{ $kabupaten->nama_kabupaten, ['size' => 3] }}
+												  </td>
+                          <td class="center col-md-2">
+														{{ $kabupaten->provinsi->nama_provinsi, ['size' => 3] }}
 												  </td>
 													<td class="center col-md-1">
 															<a class="btn btn-xs btn-success" href="{{ URL::to('admin/kabupaten/'.$kabupaten->id_kabupaten.'/edit') }}"><i class="fa fa-edit fa-fw"></i> Edit</a>
@@ -98,12 +100,38 @@
                     "sNext":     "Selanjutnya",
                     "sLast":     "Terakhir"
                 }
-              }
+              },
+              "columnDefs": [
+                { "orderable": false, "targets": 0 }
+              ],
+              dom: 'Bfrtip',
+              buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Simpan Excel',
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Simpan PDF',
+                },
+                {
+                    extend: 'print',
+                    text: 'Cetak Data',
+                }
+              ]
 			});
 	});
 	</script>
 
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
   <script src="{{ asset('js/laravel.js') }}"></script>
+
+  <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
+  <script src="{{ asset('js/jszip.min.js') }}"></script>
+  <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+  <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+  <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+  <script src="{{ asset('js/buttons.print.min.js ') }}"></script>
 
 @endsection
