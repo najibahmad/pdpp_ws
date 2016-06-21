@@ -14,7 +14,7 @@ class potensi_ekonomiTableSeeder extends Seeder
     public function run()
     {
 
-        $data = 
+        $data =
         [
         	['id_potensi_ekonomi'=>0,'nama_potensi_ekonomi'=>'Tidak Ada'],
         	['id_potensi_ekonomi'=>1,'nama_potensi_ekonomi'=>'Koperasi/Baitul Mal'],
@@ -29,7 +29,7 @@ class potensi_ekonomiTableSeeder extends Seeder
         	['id_potensi_ekonomi'=>10,'nama_potensi_ekonomi'=>'lain-lain'],
         ];
 
-        DB::table('Potensi_ekonomi')->insert($data);
+        DB::table('potensi_ekonomi')->insert($data);
     }
 
 }
