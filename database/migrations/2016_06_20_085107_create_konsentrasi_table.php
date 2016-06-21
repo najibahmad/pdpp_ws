@@ -27,5 +27,7 @@ class CreateKonsentrasiTable extends Migration
     public function down()
     {
         //
+
+        Schema::drop('konsentrasi');
     }
 }

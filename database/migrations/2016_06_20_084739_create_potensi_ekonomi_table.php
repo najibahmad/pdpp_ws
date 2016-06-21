@@ -28,5 +28,7 @@ class CreatePotensiEkonomiTable extends Migration
     public function down()
     {
         //
+
+        Schema::drop('potensi_ekonomi');
     }
 }
