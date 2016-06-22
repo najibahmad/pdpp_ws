@@ -19,10 +19,10 @@ use Auth;
 class PublicController extends Controller
 {
 
-    public function index()
-    {
-        return view('public.index');
-    }
+    // public function index()
+    // {
+    //     return view('public.index');
+    // }
     
     public function index(Request $request)
     {
