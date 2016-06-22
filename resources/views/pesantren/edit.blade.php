@@ -8,14 +8,14 @@
 @section('content')
 <div class="container">
     <div class="row top20">
-        <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="col-md-10 col-sm-10 col-xs-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit Nama Pesantren</div>
-                <div class="panel-body">
-                  {!! Form::model($pesantren,['method' => 'PATCH','url' => ['admin/pesantren',$pesantren->id_pesantren],'class' => 'form-horizontal']) !!}
+                <div class="panel-heading">Edit Data Pesantren</div>
+                {!! Form::model($pesantren,['method' => 'PATCH','url' => ['admin/pesantren',$pesantren->id_pesantren],'class' => 'form-horizontal']) !!}
+                  <div class="panel-body">
                     @include ('pesantren.form', ['text' => 'Simpan'])
-                  {!! Form::close() !!}
-                </div>
+                  </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -27,9 +27,45 @@
   <script>
     $(document).ready(function () {
       $('.kabupaten').selectize({
-        create: true,
+        create: false,
         sortField: {
-            field: 'text',
+            field: 'id_kabupaten',
+            direction: 'asc'
+        },
+        dropdownParent: 'body'
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('.tipe_pesantren').selectize({
+        create: false,
+        sortField: {
+            field: 'tipe_pesantren_id',
+            direction: 'asc'
+        },
+        dropdownParent: 'body'
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('.potensi_ekonomi').selectize({
+        create: false,
+        sortField: {
+            field: 'potensi_ekonomi_id',
+            direction: 'asc'
+        },
+        dropdownParent: 'body'
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('.konsentrasi').selectize({
+        create: false,
+        sortField: {
+            field: 'konsentrasi_id',
             direction: 'asc'
         },
         dropdownParent: 'body'

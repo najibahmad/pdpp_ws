@@ -52,14 +52,14 @@ Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
 Route::group(array('prefix' => 'admin'), function()
 {
     Route::get('/','ProvinsiController@home');
-    Route::get('/','DashboardController@adminHome');    
+    Route::get('/','DashboardController@adminHome');
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
     Route::delete('provinsi/delete/{provinsi}','ProvinsiController@destroy');
     Route::resource('kabupaten','KabupatenController',['except' => ['show','destroy']]);
     Route::delete('kabupaten/delete/{kabupaten}','KabupatenController@destroy');
-    Route::resource('pengasuh','PengasuhController',['except' => ['show','destroy']]);
-    Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
-    Route::resource('pesantren','PesantrenController',['except' => ['show','destroy']]);
+    // Route::resource('pengasuh','PengasuhController',['except' => ['show','destroy']]);
+    // Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
+    Route::resource('pesantren','PesantrenController',['except' => ['destroy']]);
     Route::delete('pesantren/delete/{pesantren}','PesantrenController@destroy');
     Route::post('pesantren/cari','PesantrenController@index2');
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
@@ -90,6 +90,3 @@ Route::group(array('prefix' => 'public'), function()
 });
 
     // Route::get('/exportpesantren','PublicController@exportPesantren');
-       
-
-

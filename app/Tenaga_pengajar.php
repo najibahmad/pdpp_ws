@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tenaga_pengajar extends Model
 {
-    //
+    protected $table='tenaga_pengajar';
+
+    public $timestamps = false;
+
   	protected $primaryKey = 'id_tenaga_pengajar';
 
     protected $fillable = [
@@ -20,5 +23,10 @@ class Tenaga_pengajar extends Model
     	'formal_pascasarjana_wanita'
 
     ];
+
+    public function pesantren()
+    {
+        return $this->hasOne('App\Pesantren','tenaga_pengajar_id','id_tenaga_pengajar');
+    }
 
 }

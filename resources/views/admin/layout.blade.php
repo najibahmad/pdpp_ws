@@ -31,6 +31,7 @@
     <!-- Custom Fonts -->
     <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
+    <link href="{{ asset('favicon.ico') }}" rel="shortcut icon">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,7 +84,7 @@
                                 </li>
                                 <li>
                                     <a href="{!! URL::to('/admin/pesbykab') !!}">Seluruh Pesantren</a>
-                                </li>                                
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -107,11 +108,11 @@
         </nav>
 
         <div id="page-wrapper">
-           <!--@if (session('pesan'))
-              <div class="alert alert-success">
+           @if (session('pesan'))
+              <div class="alert alert-success top7">
                   {{ session('pesan') }}
               </div>
-          @endif -->
+          @endif
 
           @yield('content')
         </div>

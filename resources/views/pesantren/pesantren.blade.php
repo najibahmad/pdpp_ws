@@ -30,6 +30,13 @@
  -->						<!-- /.panel-heading -->
 						<div class="panel-body">
               <div class="row bottom10">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5 col-sm-offset-3 col-xs-offset-1 bottom10">
+  								<a class="btn btn-success" href="{!! URL::to('admin/pesantren/create') !!}"><i class="fa fa-floppy-o fa-fw"></i> Tambah Pesantren</a>
+
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12" >
+                  <hr />
+                </div>
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/pesantren/cari') }}">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('provinsi_id_provinsi') ? ' has-error' : '' }}">
@@ -91,21 +98,21 @@
 										<tbody>
 											@foreach ($pesantren as $pes)
 											<tr>
-												<td class="center col-xs-1">
+												<td class="center">
 													{{ $pes->id_pesantren }}
 											  </td>
-                        <td class="center col-xs-1">
+                        <td class="center">
 													{{ $pes->NSPP }}
 											  </td>
-												<td class="center col-md-1">
+												<td class="center">
 													{{ $pes->nama_pesantren }}
 											  </td>
-                        <td class="center col-md-1">
+                        <td class="center">
                           {{ $pes->alamat_pesantren }}
-												
+
                           <!-- {{ $pes->nama_provinsi }} -->
 											  </td>
-                        <td class="center col-md-1">
+                        <td class="center">
 													{{ $pes->nama_pengasuh }}
 											  </td>
                         <td class="center col-md-1">
@@ -122,7 +129,9 @@
 													{{ $pes->website }}
 											  </td>
                         -->
-												<td class="center col-xs-2">
+												<td class="col-md-3">
+                            <a class="btn btn-xs btn-success" href="{{ URL::to('admin/pesantren/'.$pes->id_pesantren) }}"><i class="fa fa-building fa-fw"></i> Detil</a>
+                            &nbsp;&nbsp;
 														<a class="btn btn-xs btn-success" href="{{ URL::to('admin/pesantren/'.$pes->id_pesantren.'/edit') }}"><i class="fa fa-edit fa-fw"></i> Edit</a>
 														&nbsp;&nbsp;
 														<a class="btn btn-xs btn-danger" href="{{ URL::to('admin/pesantren/delete/'.$pes->id_pesantren) }}" data-token="{!! csrf_token() !!} " data-method="delete" data-confirm="Anda yakin menghapus data Pesantren?"><i class="fa fa-remove fa-fw"></i> Hapus</a>
@@ -216,7 +225,7 @@
       $('.provinsi').selectize({
         create: false,
         sortField: {
-            field: 'text',
+            field: 'id_provinsi',
             direction: 'asc'
         },
         dropdownParent: 'body',

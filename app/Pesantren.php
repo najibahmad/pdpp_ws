@@ -27,9 +27,25 @@ class Pesantren extends Model
         'no_telepon',
         'website',
         'nama_pengasuh',
-        'jumlah_santri',
-        'jumlah_santri_mukim',
-        'kabupaten_id_kabupaten'
+        'jumlah_santri_mukim_pria',
+        'jumlah_santri_mukim_wanita',
+        'jumlah_santri_tidak_mukim_pria',
+        'jumlah_santri_tidak_mukim_wanita',
+        'nonformal_pria',
+        'nonformal_wanita',
+        'formal_nonsarjana_pria',
+        'formal_nonsarjana_wanita',
+        'formal_sarjana_pria',
+        'formal_sarjana_wanita',
+        'formal_pascasarjana_pria',
+        'formal_pascasarjana_wanita',
+        'kabupaten_id_kabupaten',
+        'longitude',
+        'latitude',
+        'tahun_berdiri',
+        'tipe_pesantren_id',
+        'potensi_ekonomi_id',
+        'konsentrasi_id'
     ];
 
     /**
@@ -51,6 +67,16 @@ class Pesantren extends Model
     public function kabupaten()
   	{
         return $this->belongsTo('App\Kabupaten','kabupaten_id_kabupaten','id_kabupaten');
+    }
+
+    public function santri()
+    {
+        return $this->belongsTo('App\Santri', 'santri_id');
+    }
+
+    public function tenaga_pengajar()
+    {
+        return $this->belongsTo('App\Tenaga_pengajar', 'tenaga_pengajar_id');
     }
 
     // public function provinsi()

@@ -28,7 +28,9 @@ class PesantrenRequest extends Request
              'nama_pesantren' => 'required',
              'jumlah_santri' => 'not_in:100',
              'kabupaten_id_kabupaten' => 'not_in:0',
-             'pengasuh_id_pengasuh' => 'not_in:0',
+             'tipe_pesantren_id' => 'not_in:0',
+             'potensi_ekonomi_id' => 'not_in:0',
+             'konsentrasi_id' => 'not_in:0'
          ];
      }
 
@@ -39,7 +41,9 @@ class PesantrenRequest extends Request
         'nama_pesantren.required' => 'Nama Pesantren tidak boleh kosong',
         'jumlah_santri.required' => 'Jumlah santri tidak boleh kosong',
         'kabupaten_id_kabupaten.not_in' => 'Kabupaten tidak boleh kosong',
-        'pengasuh_id_pengasuh.not_in' => 'Nama Pengasuh Pondok tidak boleh kosong'
+        'tipe_pesantren_id.not_in' => 'Tipe Pesantren tidak boleh kosong',
+        'potensi_ekonomi_id.not_in' => 'Potensi Ekonomi tidak boleh kosong',
+        'konsentrasi_id.not_in' => 'Jenis Konsentrasi tidak boleh kosong'
       ];
     }
 }

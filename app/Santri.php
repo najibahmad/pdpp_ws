@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Santri extends Model
 {
-    //
+    protected $table='santri';
+
+    public $timestamps = false;
+
     protected $primaryKey = 'id_santri';
 
     protected $fillable = [
@@ -16,4 +19,9 @@ class Santri extends Model
     	'jumlah_santri_tidak_mukim_wanita'
 
     ];
+
+    public function pesantren()
+    {
+        return $this->hasOne('App\Pesantren','santri_id','id_santri');
+    }
 }
