@@ -46,14 +46,14 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{ URL::to('//') }}}">
                     	<h1><img src="guest/images/logo.png" alt="logo"></h1>
                     </a>
                     
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class="active"><a href="">Home</a></li>
                         <li class="dropdown"><a href="#">About Us <i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
                                 <li><a href="aboutus.html">About</a></li>
@@ -101,16 +101,23 @@
                 <div class="main-slider">
                     <div class="slide-text">
                         <h1>Cari Data Pesantren Disini</h1>
-                        <!--<p>Boudin doner frankfurter pig. Cow shank bresaola pork loin tri-tip tongue venison pork belly meatloaf short loin landjaeger biltong beef ribs shankle chicken andouille.</p>-->
                         <div class="contact-form bottom">
-							<!--<h2>Send a message</h2>-->
-							<form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
-								<div class="form-group">
-									<input type="text" name="name" class="form-control" required="required" placeholder="Name">
+
+
+                            <!--                            <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php"> -->
+                          <!--  <div class="form-group"> -->
+{!! Form::open(array('method'=>'get','class'=>'')) !!}
+<div class="input-group">
+									<input type="text" name="search" class="form-control" placeholder="Search for ..." value="{{ old('search') }}">
 									<input type="submit" name="submit" class="btn btn-submit" value="Cari">
-								</div>
-							</form>
-						</div>
+</div>
+{!! Form::close() !!}
+						<!--	</form> -->
+						            </div>
+
+
+
+
                     </div>
                     <img src="guest/images/home/slider/hill.png" class="slider-hill" alt="slider image">
                     <img src="guest/images/home/slider/house.png" class="slider-house" alt="slider image">
@@ -125,6 +132,22 @@
     <!--/#home-slider-->
 
 
+	@if(!empty($pesantrens))
+    <section id="action" class="responsive">
+      <div class="vertical-center">
+             <div class="container">
+                <div class="row">
+   
+			    		@foreach($pesantrens as $key => $value)
+			    			<h3 class="text-danger">{{ $value['NSPP'] }}</h3>
+			    			<h3>{{ $value['nama_pesantren'] }}</h3>
+			    		@endforeach
+                </div>
+             </div>
+      </div>
+
+    </section>
+	@endif
 
     <section id="action" class="responsive">
         <div class="vertical-center">

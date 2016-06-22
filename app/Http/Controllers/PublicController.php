@@ -11,69 +11,74 @@ use App\Kabupaten;
 use DB;
 use Input;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\PesantrenRequest;
 use Barryvdh\DomPDF\Facade as PDF;
 use Auth;
 
+
 class PublicController extends Controller
 {
-    // search 
-    public function index()
+
+    // public function index()
+    // {
+    //     return view('public.index');
+    // }
+    
+    public function index(Request $request)
     {
-        return view('public.index');
+
+        if($request->has('search')){
+            $pesantrens = Pesantren::search($request->input('search'))->toArray();
+        }else{
+            return view('public.index');
+        }
+
+        return view('public.index', compact('pesantrens'));
+
     }
 
-    public function getpesantren()
+    public function getKabupaten($id)
+    
     {
-        
+      $kabupatens = Kabupaten::where('provinsi_id_provinsi', '=', $id)->get();
+      //dd($kabupatens);
+      $options = array(0 => 'Semua Kabupaten');
+
+      foreach ($kabupatens as $kabupaten) {
+          $options += array($kabupaten->id_kabupaten => $kabupaten->nama_kabupaten);
+      }
+      return $options;
     }
 
     // list pesantren/ search result
-    public function listPesantrenAll()
+    public function pesantrens()
     {
 
          // dd($pesantren);
+        $provinsi = Provinsi::lists('nama_provinsi','id_provinsi');
        
         $pesantren = DB::table('pesantren')->get();
         $counter = 0;
 
-        return view('public.pesantrens',compact('pesantren','counter'));
+        return view('public.pesantrens',compact('pesantren','counter', 'provinsi'));
     }   
-
-
-    public function listPesantrenAll2()
-    {
-
-    }
 
 
     public function exportPesantrenPDF()
     {
         $pesantrens = DB::table('pesantren')
-        ->get();
-
+                        ->get();
         $row = 1;
         $pdf = PDF::loadview('pdf.reportpesantren',compact('pesantrens','row'))->setPaper('legal','landscape');
-        
         return $pdf->download('Data Report Pondok Pesantren.pdf');
-
-
-
     }
-
 
     public function exportPesantrenExcel()
     {
-     
         $pesantren = DB::table('pesantren')
-       
                     ->get();
-        // dd($pesantren);
-
         Excel::create('Data Pesantren',function($excel) use($pesantren){ 
-            //Set Property
-
             $excel->setTitle('Data Pesantren Indonesia');
-
             $excel->sheet('Data Pesantren', function($sheet) use ($pesantren) {
                 $row = 1;
                 $sheet->row($row,[
