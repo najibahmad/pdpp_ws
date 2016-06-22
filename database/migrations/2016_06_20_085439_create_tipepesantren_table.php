@@ -27,5 +27,6 @@ class CreateTipepesantrenTable extends Migration
     public function down()
     {
         //
+        Schema::drop('tipe_pesantren');
     }
 }
