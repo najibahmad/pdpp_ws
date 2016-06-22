@@ -15,11 +15,26 @@ use App\Http\Requests\PesantrenRequest;
 use Barryvdh\DomPDF\Facade as PDF;
 use Auth;
 
+
 class PublicController extends Controller
 {
+
     public function index()
     {
         return view('public.index');
+    }
+    
+    public function index(Request $request)
+    {
+
+        if($request->has('search')){
+            $pesantrens = Pesantren::search($request->input('search'))->toArray();
+        }else{
+            return view('public.index');
+        }
+
+        return view('public.index', compact('pesantrens'));
+
     }
 
     public function getKabupaten($id)
