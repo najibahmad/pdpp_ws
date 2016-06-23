@@ -49,10 +49,12 @@
 										{{ $user->hak_akses, ['size' => 1] }}
 									</td>
 									<td class="center col-md-3">
-											<a class="btn btn-xs btn-success" href="{!! URL::to('admin/pengguna/'.$user->id_pengguna.'/edit') !!}"><i class="fa fa-edit fa-fw"></i> Edit</a>
+                      <a class="btn btn-xs btn-success" href="{!! URL::to('admin/changepassworduser/'.$user->id_pengguna) !!}"><i class="fa fa-repeat fa-fw"></i> Reset</a>
+                      &nbsp;&nbsp;
+                      <a class="btn btn-xs btn-info" href="{!! URL::to('admin/pengguna/'.$user->id_pengguna.'/edit') !!}"><i class="fa fa-edit fa-fw"></i> Edit</a>
 											&nbsp;&nbsp;
 											<a class="btn btn-xs btn-danger" href="{!! URL::to('admin/pengguna/delete/'.$user->id_pengguna) !!}" data-token="{{csrf_token()}}" data-method="delete" data-confirm="Anda yakin menghapus pengguna ini?"><i class="fa fa-remove fa-fw"></i> Hapus</a>
-									</td>
+								   </td>
 								</tr>
 								@endforeach
 							</tbody>

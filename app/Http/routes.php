@@ -88,6 +88,12 @@ Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), functi
 
     // get dynamic dropdown kabupaten from provinsi ID
     Route::get('/pesantren/kabupatens/{id}', 'PesantrenController@getKabupaten');
+    // change password for admin
+    Route::get('changepassword', 'Auth\ChangePasswordsController@edit');
+    Route::post('changepassword', 'Auth\ChangePasswordsController@update');
+    // reset password pengguna
+    Route::get('changepassworduser/{id}', 'Auth\ChangePasswordsController@edit2');
+    Route::post('changepassworduser/{id}', 'Auth\ChangePasswordsController@update2');
 });
 
 Route::group(array('prefix' => 'public'), function()

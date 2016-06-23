@@ -61,7 +61,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> Profil Pengguna</a>
+                <li><a href="{!! URL::to('/admin/changepassword') !!}"><i class="fa fa-user fa-fw"></i> Ganti Password</a>
                 <li class="divider"></li>
                 <li><a href="{!! URL::to('/logout') !!}"><i class="fa fa-sign-out fa-fw"></i> Keluar</a>
             </ul>
