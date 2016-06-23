@@ -30,7 +30,6 @@ class AuthController extends Controller
      */
       protected $redirectTo = '/admin';
 
-      protected $loginView = 'auth.login';
     /**
      * Create a new authentication controller instance.
      *
@@ -114,6 +113,15 @@ class AuthController extends Controller
     //
     //     return view('auth.login');
     // }
+
+
+    public function showLoginForm()
+    {
+        if(!session()->has('from')){
+            session()->put('from', url()->previous());
+        }
+        return view('auth.login');
+    }
 
     // public function authenticated($request,$user)
     // {

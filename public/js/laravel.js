@@ -1,15 +1,17 @@
 /*
-<a href="posts/2" data-method="delete"> <---- We want to send an HTTP DELETE request
+Exemples :
+<a href="posts/2" data-method="delete" data-token="{{csrf_token()}}">
 - Or, request confirmation in the process -
-<a href="posts/2" data-method="delete" data-confirm="Are you sure?">
+<a href="posts/2" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure?">
 */
+
 
 (function() {
 
   var laravel = {
     initialize: function() {
       this.methodLinks = $('a[data-method]');
-
+      this.token = $('a[data-token]');
       this.registerEvents();
     },
 
@@ -55,8 +57,8 @@
       var token =
       $('<input>', {
         'type': 'hidden',
-        'name': 'csrf_token',
-          'value': '<?php echo csrf_token(); ?>' // hmmmm...
+        'name': '_token',
+        'value': link.data('token')
         });
 
       var hiddenInput =

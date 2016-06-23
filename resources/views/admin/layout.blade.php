@@ -98,6 +98,15 @@
                             <a href="{!! URL::to('admin/kabupaten') !!}"><i class="fa fa-database fa-fw"></i> Kabupaten</a>
                         </li>
                         <li>
+                            <a href="{!! URL::to('admin/tipepesantren') !!}"><i class="fa fa-database fa-fw"></i> Tipe Pesantren</a>
+                        </li>
+                        <li>
+                            <a href="{!! URL::to('admin/konsentrasi') !!}"><i class="fa fa-database fa-fw"></i> Konsentrasi Pesantren</a>
+                        </li>
+                        <li>
+                            <a href="{!! URL::to('admin/potensiekonomi') !!}"><i class="fa fa-database fa-fw"></i> Potensi Ekonomi</a>
+                        </li>
+                        <li>
                             <a href="{!! URL::to('admin/pengguna') !!}"><i class="fa fa-user fa-fw"></i> Pengguna</a>
                         </li>
                     </ul>
@@ -109,9 +118,12 @@
 
         <div id="page-wrapper">
            @if (session('pesan'))
-              <div class="alert alert-success top7">
+            <div class="row top7">
+              <div class="alert alert-success fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                   {{ session('pesan') }}
               </div>
+            </div>
           @endif
 
           @yield('content')
