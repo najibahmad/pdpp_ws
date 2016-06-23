@@ -47,42 +47,53 @@ Route::get('/public','PublicController@index');
 Route::get('/PesantrenSearch', 'PesantrenSearchController@index');
 Route::post('/pesantrenCreate', 'PesantrenSearchController@create');
 
-// Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), function()
-
+//
+// Route::group(array('prefix' => 'admin','middleware' => ['admin']), function()
 Route::group(array('prefix' => 'admin'), function()
 {
-    Route::get('/','ProvinsiController@home');
+    // Route::get('/','ProvinsiController@home');
     Route::get('/','DashboardController@adminHome');
     Route::resource('provinsi','ProvinsiController',['except' => ['show','destroy']]);
     Route::delete('provinsi/delete/{provinsi}','ProvinsiController@destroy');
     Route::resource('kabupaten','KabupatenController',['except' => ['show','destroy']]);
     Route::delete('kabupaten/delete/{kabupaten}','KabupatenController@destroy');
-    // Route::resource('pengasuh','PengasuhController',['except' => ['show','destroy']]);
-    // Route::delete('pengasuh/delete/{pengasuh}','PengasuhController@destroy');
-    Route::resource('pesantren','PesantrenController',['except' => ['destroy']]);
+    Route::resource('pesantren','PesantrenController',['except' => ['show','destroy']]);
     Route::delete('pesantren/delete/{pesantren}','PesantrenController@destroy');
     Route::post('pesantren/cari','PesantrenController@index2');
     Route::resource('pengguna','PenggunaController',['except' => ['show','destroy']]);
     Route::delete('pengguna/delete/{pengguna}','PenggunaController@destroy');
+
+    // resourcefull for Tipe Pesantren
+    Route::resource('tipepesantren','TipePesantrenController',['except' => ['show','destroy']]);
+    Route::delete('tipepesantren/delete/{tipe}','TipePesantrenController@destroy');
+
+    // resourcefull for Konsentrasi
+    Route::resource('konsentrasi','KonsentrasiController',['except' => ['show','destroy']]);
+    Route::delete('konsentrasi/delete/{tipe}','KonsentrasiController@destroy');
+
+    // resourcefull for Potensi Ekonomi
+    Route::resource('potensiekonomi','PotensiEkonomiController',['except' => ['show','destroy']]);
+    Route::delete('potensiekonomi/delete/{tipe}','PotensiEkonomiController@destroy');
 
     // report
     Route::get('/pesbyprov','LaporanController@pesantrenByProvinsi');
     Route::post('/pesbyprov','LaporanController@pesantrenByProvinsi2');
     Route::get('/pesbykab','LaporanController@pesantrenByKabupaten');
     Route::post('/pesbykab','LaporanController@pesantrenByKabupaten2');
-
+    // pdf
     Route::get('/exsportpes0pdf/{id_prov}','LaporanController@exportPesantrenByProvinsiPDF');
     Route::get('/exsportpes0xls/{id_prov}','LaporanController@exportPesantrenByProvinsiEXL');
 
     Route::get('/exsportpes1pdf/{id_kab}','LaporanController@exportPesantrenByKabupatenPDF');
     Route::get('/exsportpes1xls/{id_kab}','LaporanController@exportPesantrenByKabupatenEXl');
 
+    // get dynamic dropdown kabupaten from provinsi ID
     Route::get('/pesantren/kabupatens/{id}', 'PesantrenController@getKabupaten');
 });
 
 Route::group(array('prefix' => 'public'), function()
 {
-    Route::get('/pesantrens','PublicController@pesantrens');
+    Route::get('/allpesantren','PublicController@listPesantrenAll');
     Route::post('/allpesantren','PublicController@listPesantrenAll2');
 
     Route::get('/exportpesantrenbyPDF','PublicController@exportPesantrenPDF');

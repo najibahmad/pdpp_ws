@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-      protected $redirectTo = '/';
+      protected $redirectTo = '/admin';
     /**
      * Create a new authentication controller instance.
      *
@@ -84,17 +84,17 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-    // public function showRegistrationForm() {
-    //     return redirect('/');
-    // }
+    public function showRegistrationForm() {
+        return redirect('/');
+    }
 
-    // public function showLoginForm()
-    // {
-    //     if(!session()->has('from')){
-    //         session()->put('from', url()->previous());
-    //     }
-    //     return view('auth.login');
-    // }
+    public function showLoginForm()
+    {
+        if(!session()->has('from')){
+            session()->put('from', url()->previous());
+        }
+        return view('auth.login');
+    }
 
     public function authenticated($request,$user)
     {
