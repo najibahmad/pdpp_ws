@@ -89,13 +89,13 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-    public function showLoginForm()
-    {
-        if(!session()->has('from')){
-            session()->put('from', url()->previous());
-        }
-        return view('auth.login');
-    }
+    // public function showLoginForm()
+    // {
+    //     if(!session()->has('from')){
+    //         session()->put('from', url()->previous());
+    //     }
+    //     return view('auth.login');
+    // }
 
     /**
      * Show the application login form.
@@ -114,14 +114,6 @@ class AuthController extends Controller
     //     return view('auth.login');
     // }
 
-
-    public function showLoginForm()
-    {
-        if(!session()->has('from')){
-            session()->put('from', url()->previous());
-        }
-        return view('auth.login');
-    }
 
     // public function authenticated($request,$user)
     // {
