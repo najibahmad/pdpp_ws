@@ -14,18 +14,18 @@ class santriTableSeeder extends Seeder
     {
         //
 
-         $faker = Faker\Factory::create('id_ID');
-         for($i=0; $i<30; $i++)
-         {
-            // $santriRandom = santri::all()->random(1);
+        //  $faker = Faker\Factory::create('id_ID');
+        //  for($i=0; $i<30; $i++)
+        //  {
+        //     // $santriRandom = santri::all()->random(1);
 
-            DB::table('santri')->insert([
-                'jumlah_santri_mukim_pria' => $faker ->randomNumber(3),
-                'jumlah_santri_mukim_wanita' => $faker ->randomNumber(3),
-                'jumlah_santri_tidak_mukim_pria'=>$faker ->randomNumber(3),
-                'jumlah_santri_tidak_mukim_wanita'=>$faker ->randomNumber(3),        
-                ]);
-        }
+        //     DB::table('santri')->insert([
+        //         'jumlah_santri_mukim_pria' => $faker ->randomNumber(3),
+        //         'jumlah_santri_mukim_wanita' => $faker ->randomNumber(3),
+        //         'jumlah_santri_tidak_mukim_pria'=>$faker ->randomNumber(3),
+        //         'jumlah_santri_tidak_mukim_wanita'=>$faker ->randomNumber(3),        
+        //         ]);
+        // }
 
     }
 }

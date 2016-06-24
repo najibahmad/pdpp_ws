@@ -13,12 +13,16 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
 
-        // $this->call(ProvinsiTableSeeder::class);
-        // $this->call(KabupatenTableSeeder::class);
-        // $this->call(PesantrenTableSeeder::class);
+        $this->call(ProvinsiTableSeeder::class);
         $this->call(potensi_ekonomiTableSeeder::class);
         $this->call(konsentrasiTableSeeder::class);
         $this->call(tipe_pesantrenTableSeeder::class);
+
+        // $this->call(KabupatenTableSeeder::class);
+        // $this->call(PesantrenTableSeeder::class);
+                 // $this->call(potensi_ekonomiTableSeeder::class);
+                 // $this->call(konsentrasiTableSeeder::class);
+                 // $this->call(tipe_pesantrenTableSeeder::class);
         // $this->call(tenaga_pengajarTableSeeder::class);
         // $this->call(santriTableSeeder::class);
     }
