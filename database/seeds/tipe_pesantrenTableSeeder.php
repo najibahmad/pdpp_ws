@@ -11,15 +11,15 @@ class tipe_pesantrenTableSeeder extends Seeder
      */
     public function run()
     {
-        //        
-    // $data = 
-    //     [
-    //         ['id_tipe_pesantren'=>1,'nama_tipe_pesantren'=>'Hanya menyelenggarakan kajian kitab'],
-    //         ['id_tipe_pesantren'=>2,'nama_tipe_pesantren'=>'Menyelenggarakan kajian kitab dan Layanan pendidikan lainnya']
+               
+    $data = 
+        [
+            ['id_tipe_pesantren'=>1,'nama_tipe_pesantren'=>'Hanya menyelenggarakan Kajian Kitab'],
+            ['id_tipe_pesantren'=>2,'nama_tipe_pesantren'=>'Menyelenggarakan Kajian Kitab & Layanan Pendidikan lainnya']
             
-    //     ];
+        ];
 
-    //     DB::table('tipe_pesantren')->insert($data);
+        DB::table('tipe_pesantren')->insert($data);
 
     }
 }
