@@ -15,7 +15,7 @@ class ProvinsiTableSeeder extends Seeder
         // DB::table('provinsi')->delete();
 
        //remove any existing data in provinsi table
-        DB::table('provinsi')->truncate();
+        // DB::table('provinsi')->truncate();
 
         $data =
         [
