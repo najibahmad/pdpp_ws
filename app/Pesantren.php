@@ -79,6 +79,21 @@ class Pesantren extends Model
         return $this->belongsTo('App\Tenaga_pengajar', 'tenaga_pengajar_id');
     }
 
+    public function konsentrasi()
+  	{
+        return $this->belongsTo('App\Konsentrasi','konsentrasi_id','id_konsentrasi');
+    }
+
+    public function potensiekonomi()
+  	{
+        return $this->belongsTo('App\Potensi_ekonomi','potensi_ekonomi_id','id_potensi_ekonomi');
+    }
+
+    public function tipepesantren()
+  	{
+        return $this->belongsTo('App\Tipe_pesantren','tipe_pesantren_id','id_tipe_pesantren');
+    }
+
     // public function provinsi()
     // {
     //     return $this->hasManyThrough('App\Provinsi', 'App\Kabupaten',

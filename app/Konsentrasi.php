@@ -14,4 +14,9 @@ class Konsentrasi extends Model
 
     protected $fillable = ['nama_konsentrasi'];
 
+    public function pesantrens()
+  	{
+           return $this->hasMany('App\Pesantren','konsentrasi_id','id_konsentrasi');
+    }
+
 }

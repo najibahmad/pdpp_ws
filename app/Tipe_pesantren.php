@@ -14,4 +14,9 @@ class Tipe_pesantren extends Model
 
     protected $fillable = ['nama_tipe_pesantren'];
 
+    public function pesantrens()
+  	{
+           return $this->hasMany('App\Pesantren','tipe_pesantren_id','id_tipe_pesantren');
+    }
+
 }

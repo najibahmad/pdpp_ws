@@ -14,4 +14,9 @@ class Potensi_ekonomi extends Model
 
     protected $fillable = ['nama_potensi_ekonomi'];
 
+    public function pesantrens()
+  	{
+           return $this->hasMany('App\Pesantren','potensi_ekonomi_id','id_potensi_ekonomi');
+    }
+
 }
