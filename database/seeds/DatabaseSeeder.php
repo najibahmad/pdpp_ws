@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(konsentrasiTableSeeder::class);
         $this->call(tipe_pesantrenTableSeeder::class);
         $this->call(konsentrasiTableSeeder::class);
-        
+        $this->call(penggunaTableSeeder::class);
+
                 // $this->call(PesantrenTableSeeder::class);
                 // $this->call(tenaga_pengajarTableSeeder::class);
                 // $this->call(santriTableSeeder::class);
