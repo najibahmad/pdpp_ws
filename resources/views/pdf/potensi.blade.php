@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Data Pesantren Berdasarkan Provinsi</title>
+  <title>Data Potensi Ekonomi Pesantren</title>
     <style>
     /* --------------------------------------------------------------
     Hartija Css Print Framework
@@ -65,40 +65,20 @@
     </style>
   </head>
   <body>
-    <h1>Data Pesantren Berdasarkan Kabupaten</h1>
+    <h1>Data Potensi Ekonomi Pesantren</h1>
     <hr>
     <table>
       <thead>
         <tr>
           <td>No</td>
-          <td>NSPP</td>
-          <td>Nama Pesantren</td>
-          <td>Nama Pengasuh</td>
-          <td>Jumlah Santri</td>
-          <td>Jumlah Santri Mukim</td>
-          <td>No Telepon</td>
-          <td>Alamat Website</td>
-          <td>Alamat Pesantren</td>
-          <td>Kecamatan</td>
-          <td>Kabupaten</td>
-          <td>Provinsi</td>
+          <td>Nama Potensi Ekonomi</td>
         </tr>
-        </thead>
+      </thead>
       <tbody>
-        @foreach ($pesantrens as $pesantren)
+        @foreach ($eko as $ekonomi)
         <tr>
-          <td>{{ $row++ }}</td>
-          <td>{{ $pesantren->NSPP }}</td>
-          <td>{{ $pesantren->nama_pesantren }}</td>
-          <td>{{ $pesantren->nama_pengasuh }}</td>
-          <td>{{ $pesantren->jumlah_santri }}</td>
-          <td>{{ $pesantren->jumlah_santri_mukim }}</td>
-          <td>{{ $pesantren->no_telepon }}</td>
-          <td>{{ $pesantren->website }}</td>
-          <td>{{ $pesantren->alamat_pesantren }}</td>
-          <td>{{ $pesantren->kecamatan_pesantren }}</td>
-          <td>{{ $pesantren->nama_kabupaten }}</td>
-          <td>{{ $pesantren->nama_provinsi }}</td>
+          <td>{{ $ekonomi->id_potensi_ekonomi }}</td>
+          <td>{{ $ekonomi->nama_potensi_ekonomi }}</td>
         </tr>
         @endforeach
       </tbody>

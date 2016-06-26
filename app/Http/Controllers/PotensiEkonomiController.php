@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\Potensi_ekonomi;
 use App\Http\Requests\PotensiEkonomiRequest;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class PotensiEkonomiController extends Controller
 {
@@ -89,6 +91,7 @@ class PotensiEkonomiController extends Controller
         //Save record to the database
         $ekonomi->update($request->all());
 
+        \Session::flash('pesan','Potensi Ekonomi telah berhasil diperbaharui!');
         //Return to universities controller
         return redirect('admin/potensiekonomi');
     }
@@ -104,5 +107,37 @@ class PotensiEkonomiController extends Controller
         Potensi_ekonomi::destroy($id);
 
         return redirect('admin/potensiekonomi');
+    }
+
+
+    public function exportPDF()
+    {
+      $eko = Potensi_ekonomi::all();
+      $row = 1;
+      $pdf = PDF::loadview('pdf.potensi', compact('row','eko'))->setPaper('A4');
+      return $pdf->download('Data Potensi Ekonomi Pesantren.pdf');
+
+    }
+
+    public function exportEXL()
+    {
+      $eko = Potensi_ekonomi::all();
+      // dd($prov);
+
+      Excel::create('Data Potensi Ekonomi Pesantren', function($excel) use ($eko) {
+            // Set property
+            $excel->setTitle('Data Potensi Ekonomi Pesantren')
+            ->setCreator('Administrator');
+            $excel->sheet('Data Potensi Ekonomi Pesantren', function($sheet) use ($eko) {
+                $row = 1;
+                $sheet->row($row,['No','Nama Potensi Ekonomi']);
+                foreach ($eko as $ekonomi) {
+                      $sheet->row(++$row,[
+                              $ekonomi->id_potensi_ekonomi,
+                              $ekonomi->nama_potensi_ekonomi
+                      ]);
+                }
+             });
+      })->export('xls');
     }
 }

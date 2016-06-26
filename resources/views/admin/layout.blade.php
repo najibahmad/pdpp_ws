@@ -74,21 +74,6 @@
                             <a href="{!! URL::to('/admin') !!}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Rangkuman Data<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{!! URL::to('/admin/pesbyprov') !!}">Pesantren Berdasarkan Provinsi</a>
-                                </li>
-                                <li>
-                                    <a href="{!! URL::to('/admin/pesbykab') !!}">Pesantren Berdasarkan Kabupaten</a>
-                                </li>
-                                <li>
-                                    <a href="{!! URL::to('/admin/pesbykab') !!}">Seluruh Pesantren</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
                             <a href="{!! URL::to('admin/pesantren') !!}"><i class="fa fa-table fa-fw"></i> Pesantren</a>
                         </li>
                         <li>
@@ -117,13 +102,15 @@
         </nav>
 
         <div id="page-wrapper">
-           @if (session('pesan'))
-            <div class="row top7">
-              <div class="alert alert-success fade in">
+          @if (session('pesan'))
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="alert alert-success fade in top10 bottom7">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                   {{ session('pesan') }}
               </div>
             </div>
+          </div>
           @endif
 
           @yield('content')

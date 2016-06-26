@@ -86,11 +86,28 @@ Route::group(array('prefix' => 'admin','middleware' => ['admin','auth']), functi
     Route::get('/exsportpes1pdf/{id_kab}','LaporanController@exportPesantrenByKabupatenPDF');
     Route::get('/exsportpes1xls/{id_kab}','LaporanController@exportPesantrenByKabupatenEXl');
 
+    // Exsport PDF dan Excel
+    Route::get('/exsportprovinsipdf','ProvinsiController@exportPDF');
+    Route::get('/exsportprovinsixls','ProvinsiController@exportEXL');
+    Route::get('/exsportkabupatenpdf','KabupatenController@exportPDF');
+    Route::get('/exsportkabupatenxls','KabupatenController@exportEXL');
+    Route::get('/exsporttipepesantrenpdf','TipePesantrenController@exportPDF');
+    Route::get('/exsporttipepesantrenxls','TipePesantrenController@exportEXL');
+    Route::get('/exsportkonsentrasipdf','KonsentrasiController@exportPDF');
+    Route::get('/exsportkonsentrasixls','KonsentrasiController@exportEXL');
+    Route::get('/exsportpotensiekonomipdf','PotensiEkonomiController@exportPDF');
+    Route::get('/exsportpotensiekonomixls','PotensiEkonomiController@exportEXL');
+    Route::get('/exsportpenggunapdf','PenggunaController@exportPDF');
+    Route::get('/exsportpenggunaxls','PenggunaController@exportEXL');
+
+
     // get dynamic dropdown kabupaten from provinsi ID
     Route::get('/pesantren/kabupatens/{id}', 'PesantrenController@getKabupaten');
-    // change password for admin
+
+    // change password for current user
     Route::get('changepassword', 'Auth\ChangePasswordsController@edit');
     Route::post('changepassword', 'Auth\ChangePasswordsController@update');
+
     // reset password pengguna
     Route::get('changepassworduser/{id}', 'Auth\ChangePasswordsController@edit2');
     Route::post('changepassworduser/{id}', 'Auth\ChangePasswordsController@update2');

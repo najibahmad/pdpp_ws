@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\Tipe_pesantren;
 use App\Http\Requests\TipePesantrenRequest;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class TipePesantrenController extends Controller
 {
@@ -89,7 +91,7 @@ class TipePesantrenController extends Controller
         //Save record to the database
         $tipe->update($request->all());
 
-        \Session::flash('pesan','Tipe Pesantren telah berhasil diedit!');
+        \Session::flash('pesan','Tipe Pesantren telah berhasil diperbaharui!');
         //Return to universities controller
         return redirect('admin/tipepesantren');
     }
@@ -105,5 +107,37 @@ class TipePesantrenController extends Controller
         Tipe_pesantren::destroy($id);
 
         return redirect('admin/tipepesantren');
+    }
+
+
+    public function exportPDF()
+    {
+      $tipe = Tipe_pesantren::all();
+      $row = 1;
+      $pdf = PDF::loadview('pdf.tipepesantren', compact('row','tipe'))->setPaper('A4');
+      return $pdf->download('Data Tipe Pesantren.pdf');
+
+    }
+
+    public function exportEXL()
+    {
+      $tipe = Tipe_pesantren::all();
+      // dd($prov);
+
+      Excel::create('Data Tipe Pesantren', function($excel) use ($tipe) {
+            // Set property
+            $excel->setTitle('Data Tipe Pesantren')
+            ->setCreator('Administrator');
+            $excel->sheet('Data Tipe Pesantren', function($sheet) use ($tipe) {
+                $row = 1;
+                $sheet->row($row,['No','Nama Tipe Pesantren']);
+                foreach ($tipe as $tip) {
+                      $sheet->row(++$row,[
+                              $tip->id_tipe_pesantren,
+                              $tip->nama_tipe_pesantren
+                      ]);
+                }
+             });
+      })->export('xls');
     }
 }

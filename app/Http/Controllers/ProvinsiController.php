@@ -10,6 +10,8 @@ use App\Provinsi;
 use App\Pesantren;
 use App\Http\Requests\ProvinsiRequest;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ProvinsiController extends Controller
 {
@@ -28,7 +30,7 @@ class ProvinsiController extends Controller
       //         array_push($jmlpesantrens, $pesantren->kabupaten->count());
       //     }
 
-      
+
 
       // }
 
@@ -71,7 +73,7 @@ class ProvinsiController extends Controller
       // foreach (Provinsi::all() as $kabupaten) {
       //     array_push($nama_provinsi, $kabupaten->nama_provinsi);
       //     array_push($jmlpesantrens, $kabupaten->kabupatens->count());
-          
+
       foreach ($pesantrens as $pesantren) {
            array_push($nama_provinsi, $pesantren->nama_provinsi); //$pesantren->nama_kabupaten
            array_push($jmlpesantrens, $pesantren->jumlah);
@@ -158,6 +160,8 @@ class ProvinsiController extends Controller
         //Save record to the database
         $prov->update($request->all());
 
+        \Session::flash('pesan','Provinsi telah berhasil diperbaharui!');
+
         //Return to universities controller
         return redirect('admin/provinsi');
     }
@@ -173,5 +177,38 @@ class ProvinsiController extends Controller
         Provinsi::destroy($id);
 
         return redirect('admin/provinsi');
+    }
+
+
+
+    public function exportPDF()
+    {
+      $prov = Provinsi::all();
+      $row = 1;
+      $pdf = PDF::loadview('pdf.provinsi', compact('row','prov'))->setPaper('A4');
+      return $pdf->download('Data Seluruh Provinsi.pdf');
+
+    }
+
+    public function exportEXL()
+    {
+      $prov = Provinsi::all('id_provinsi','nama_provinsi');
+      // dd($prov);
+
+      Excel::create('Data Seluruh Provinsi', function($excel) use ($prov) {
+            // Set property
+            $excel->setTitle('Data Seluruh Provinsi')
+            ->setCreator('Administrator');
+            $excel->sheet('Data Seluruh Provinsi', function($sheet) use ($prov) {
+                $row = 1;
+                $sheet->row($row,['No','Nama Provinsi']);
+                foreach ($prov as $provinsi) {
+                      $sheet->row(++$row,[
+                              $provinsi->id_provinsi,
+                              $provinsi->nama_provinsi
+                      ]);
+                }
+             });
+      })->export('xls');
     }
 }

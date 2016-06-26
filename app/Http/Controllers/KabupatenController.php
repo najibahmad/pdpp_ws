@@ -9,6 +9,9 @@ use App\Http\Requests;
 use App\Provinsi;
 use App\Kabupaten;
 use App\Http\Requests\KabupatenRequest;
+use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class KabupatenController extends Controller
 {
@@ -92,6 +95,8 @@ class KabupatenController extends Controller
       //Save record to the database
       $kab->update($request->all());
 
+      \Session::flash('pesan','Kabupaten telah berhasil diperbaharui!');
+
       //Return to universities controller
       return redirect('admin/kabupaten');
     }
@@ -107,5 +112,46 @@ class KabupatenController extends Controller
       Kabupaten::destroy($id);
 
       return redirect('admin/kabupaten');
+    }
+
+
+    public function exportPDF()
+    {
+      $kab = DB::table('kabupaten')
+              ->select('id_kabupaten', 'nama_kabupaten', 'nama_provinsi')
+              ->Join('provinsi', 'kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+              ->groupBy('kabupaten.id_kabupaten')
+              ->get();
+
+      $row = 1;
+      $pdf = PDF::loadview('pdf.kabupaten', compact('row','kab'))->setPaper('A4');
+      return $pdf->download('Data Seluruh Kabupaten.pdf');
+
+    }
+
+    public function exportEXL()
+    {
+      $kab = DB::table('kabupaten')
+              ->select('id_kabupaten', 'nama_kabupaten', 'nama_provinsi')
+              ->Join('provinsi', 'kabupaten.provinsi_id_provinsi', '=', 'provinsi.id_provinsi')
+              ->groupBy('kabupaten.id_kabupaten')
+              ->get();
+
+      Excel::create('Data Seluruh Kabupaten', function($excel) use ($kab) {
+            // Set property
+            $excel->setTitle('Data Seluruh Kabupaten')
+            ->setCreator('Administrator');
+            $excel->sheet('Data Seluruh Kabupaten', function($sheet) use ($kab) {
+                $row = 1;
+                $sheet->row($row,['No','Nama Kabupaten','Nama Provinsi']);
+                foreach ($kab as $kabupaten) {
+                      $sheet->row(++$row,[
+                              $kabupaten->id_kabupaten,
+                              $kabupaten->nama_kabupaten,
+                              $kabupaten->nama_provinsi
+                      ]);
+                }
+             });
+      })->export('xls');
     }
 }

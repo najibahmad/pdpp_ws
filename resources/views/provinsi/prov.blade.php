@@ -28,7 +28,17 @@
 						<div class="panel-body">
 							<div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5 col-sm-offset-3 col-xs-offset-1 bottom10">
 								<a class="btn btn-success" href="{!! URL::to('admin/provinsi/create') !!}"><i class="fa fa-floppy-o fa-fw"></i> Tambah Provinsi</a>
-							</div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-xs-12" >
+                <hr />
+              </div>
+              <div class="row bottom10">
+                <p>
+                  <a class="btn btn-primary left15" href="{{ url('/admin/exsportprovinsipdf/') }}"><i class="fa fa-file-pdf-o"></i>  Export PDF</a>
+                  <a class="btn btn-primary left15" href="{{ url('/admin/exsportprovinsixls/') }}"><i class="fa fa-file-excel-o"></i>  Export Excel </a>
+                </p>
+              </div>
+
 								<div class="dataTable_wrapper">
 										<table class="table table-striped table-bordered table-hover" id="tabel-provinsi">
 											<thead>
@@ -76,7 +86,7 @@
 	<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 	<script>
   $(document).ready(function() {
-			$('#tabel-provinsi').DataTable({
+			var table = $('#tabel-provinsi').DataTable({
 							responsive: true,
               language: {
                 "sProcessing":   "Sedang memproses...",
@@ -97,22 +107,22 @@
               },
               "columnDefs": [
                 { "orderable": false, "targets": 0 }
-              ],
-              dom: 'Bfrtip',
-              buttons: [
-                {
-                    extend: 'excel',
-                    text: 'Simpan Excel',
-                },
-                {
-                    extend: 'pdf',
-                    text: 'Simpan PDF',
-                },
-                {
-                    extend: 'print',
-                    text: 'Cetak Data',
-                }
-              ]
+              ]//,
+              // dom: 'Bfrtip',
+              // buttons: [
+              //   {
+              //       extend: 'excel',
+              //       text: 'Simpan Excel',
+              //   },
+              //   {
+              //       extend: 'pdf',
+              //       text: 'Simpan PDF',
+              //   },
+              //   {
+              //       extend: 'print',
+              //       text: 'Cetak Data',
+              //   }
+              // ]
 			});
 	});
 	</script>
@@ -120,12 +130,12 @@
 	<!-- Delete Data JavaScript - Jeffry Wayy -->
   <script src="{{ asset('js/laravel.js') }}"></script>
 
-  <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+  <!-- <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
   <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
   <script src="{{ asset('js/jszip.min.js') }}"></script>
   <script src="{{ asset('js/pdfmake.min.js') }}"></script>
   <script src="{{ asset('js/vfs_fonts.js') }}"></script>
   <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
-  <script src="{{ asset('js/buttons.print.min.js ') }}"></script>
+  <script src="{{ asset('js/buttons.print.min.js ') }}"></script> -->
 
 @endsection

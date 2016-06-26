@@ -151,7 +151,7 @@
       $('.provinsi').selectize({
         //create: true,
         sortField: {
-            field: 'text',
+            field: 'id_provinsi',
             direction: 'asc'
         },
         dropdownParent: 'body'

@@ -146,7 +146,7 @@
       $('.kabupaten').selectize({
         //create: true,
         sortField: {
-            field: 'text',
+            field: 'id_kabupaten',
             direction: 'asc'
         },
         dropdownParent: 'body'

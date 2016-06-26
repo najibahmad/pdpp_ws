@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\Konsentrasi;
 use App\Http\Requests\KonsentrasiRequest;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class KonsentrasiController extends Controller
 {
@@ -89,6 +91,7 @@ class KonsentrasiController extends Controller
         //Save record to the database
         $kon->update($request->all());
 
+        \Session::flash('pesan','Konsentrasi telah berhasil diperbaharui!');
         //Return to universities controller
         return redirect('admin/konsentrasi');
     }
@@ -104,5 +107,37 @@ class KonsentrasiController extends Controller
         Konsentrasi::destroy($id);
 
         return redirect('admin/konsentrasi');
+    }
+
+
+    public function exportPDF()
+    {
+      $kon = Konsentrasi::all();
+      $row = 1;
+      $pdf = PDF::loadview('pdf.konsentrasi', compact('row','kon'))->setPaper('A4');
+      return $pdf->download('Data Konsentrasi Pesantren.pdf');
+
+    }
+
+    public function exportEXL()
+    {
+      $kon = Konsentrasi::all();
+      // dd($prov);
+
+      Excel::create('Data Konsentrasi Pesantren', function($excel) use ($kon) {
+            // Set property
+            $excel->setTitle('Data Konsentrasi Pesantren')
+            ->setCreator('Administrator');
+            $excel->sheet('Data Konsentrasi Pesantren', function($sheet) use ($kon) {
+                $row = 1;
+                $sheet->row($row,['No','Nama Konsentasi']);
+                foreach ($kon as $konsentrasi) {
+                      $sheet->row(++$row,[
+                              $konsentrasi->id_konsentrasi,
+                              $konsentrasi->nama_konsentrasi
+                      ]);
+                }
+             });
+      })->export('xls');
     }
 }

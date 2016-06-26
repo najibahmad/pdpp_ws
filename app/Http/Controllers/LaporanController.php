@@ -217,7 +217,7 @@ class LaporanController extends Controller
               //->paginate(15);
               ->get();
       $row = 1;
-      $pdf = PDF::loadview('pdf.pesantrenkabupaten', compact('pesantrens','row','kab','kab'))->setPaper('legal', 'landscape');;
+      $pdf = PDF::loadview('pdf.pesantrenkabupaten', compact('pesantrens','row','kab'))->setPaper('legal', 'landscape');;
       return $pdf->download('Data Pesantren Berdasarkan Kabupaten.pdf');
     }
 
@@ -295,7 +295,7 @@ class LaporanController extends Controller
                     ->get();
         // dd($pesantren);
 
-        Excel::create('Data Pesantren',function($excel) use($pesantren){ 
+        Excel::create('Data Pesantren',function($excel) use($pesantren){
             //Set Property
 
             $excel->setTitle('Data Pesantren Indonesia');
@@ -330,8 +330,7 @@ class LaporanController extends Controller
                         $_pesantren->website
                         ]);
                 }
-            });      
+            });
         })->export('xls');
     }
 }
-

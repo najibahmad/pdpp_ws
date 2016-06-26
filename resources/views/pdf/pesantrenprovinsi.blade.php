@@ -83,7 +83,7 @@
           <td>Kabupaten</td>
           <td>Provinsi</td>
         </tr>
-        </thead>
+      </thead>
       <tbody>
         @foreach ($pesantrens as $pesantren)
         <tr>
